@@ -41,3 +41,8 @@ Feedback and re-design
         * Added project abstract summarizing goals and functionalities  
         * Overall, clarified ambiguous language 
 ==============================================================
+
+samsonW -- 2022-12-7 12:59
+--------------------------------------------------------------
+Added launch codes to readme.
+==============================================================
