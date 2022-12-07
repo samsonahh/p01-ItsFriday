@@ -28,3 +28,16 @@ samsonW -- 2022-12-5 21:48
 --------------------------------------------------------------
 Added first version of devlog. Setup README contents.
 ==============================================================
+
+danielH -- 2022-12-6 23:34
+--------------------------------------------------------------
+Feedback and re-design
+    Feedback summary 
+        * Clarification needed on general description of the project, API usage, API integration 
+        * Unclear navigation and functition of the matching.html template 
+    Revisions: 
+        * Added more purpose and intent through descriptions of API 
+        * Made matching.html description more comprehensive, addressing all case scenarios 
+        * Added project abstract summarizing goals and functionalities  
+        * Overall, clarified ambiguous language 
+==============================================================
