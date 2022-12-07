@@ -5,7 +5,7 @@ Verit Li - Flask
 Daniel He - Foundation, HTML, Flask Helper  
 (PM) Samson Wu - Foundation, HTML, Flask Helper  
 ## Description:
-A website that generates random quotes from anime characters and calculates love between two characters based on their quotes.
+The Anime Dating Love Calculator web application aims to provide users with the ability to ascertain the compatibility between anime characters of their choosing. Users will be able to search for anime characters through the name or show title, view a character’s “dating” profile, and match two characters to obtain a comprehensive breakdown of their compatibility results calculated through an algorithm. Previous match history can be viewed on the home page. 
 ## APIs:
 [Love Calculator](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_LoveCalculator.md)  
 [MyAnimeList](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_MyAnimeList.md)  
