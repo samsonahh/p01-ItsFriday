@@ -49,9 +49,9 @@ Added launch codes to readme.
 
 ALL -- 2022-12-8 14:06
 --------------------------------------------------------------
-    * Database login
-    * Home became prettier
-    * Login page becoming prettier
-    * Got all API keys
-    * Started API functions
+    * Erica: Database login functions
+    * Samson: Home page becoming prettier
+    * Daniel: Login page becoming prettier
+    * Verit: Got API keys in the keys folder
+    * Verit: Started API functions
 ==============================================================
