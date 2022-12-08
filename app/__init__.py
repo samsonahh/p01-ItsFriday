@@ -15,8 +15,15 @@ def home():
     loginstatus = False
     return render_template("home.html", login_status = loginstatus)
 
-@app.route('/login')
+@app.route('/login') #, methods=['POST'])
 def login():
+    if request.method == 'POST':
+        db = sqlite3.connect(DB_FILE) #opens if file exists... if not, it will create one
+        c = db.cursor #be able to execute & operate 
+        username = request.form['username']
+        password = request.form['password']
+        
+
     return render_template("login.html")
 
 @app.route('/register')
