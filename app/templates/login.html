@@ -16,10 +16,19 @@ P01
                 <div class="cell small-6 medium-6 large-6">
                     <div class = "card" style="background-color: red; width: 100vh;">
                         <div class = "card-section">
-                            card section
+                            <form method = "POST" action="/activate_login">
+                                Username:
+                                <input type="text" name="username" placeholder="enter username here"> 
+                                <br>
+                                <br>
+                                Password:
+                                <input type="password" name="password" placeholder="enter password here">
+                                <br><br>
+                                <input type="submit" name="sub1" value = "SUBMIT"></tr> <!-- submit button -->
+                              </form>
                         </div>
                         <div class = "card-section">
-                            card section
+                            {{additional}}
                         </div>
                         <div class = "card-section">
                             card section
