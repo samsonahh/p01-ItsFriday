@@ -12,7 +12,7 @@ app.secret_key = b'kJu2hlllSnasd8a0a@(@2lask'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    loginstatus = False
+    loginstatus = False #Samson: We should check session whether user is logged in
     return render_template("home.html", login_status = loginstatus)
 
 @app.route('/login') #, methods=['POST'])

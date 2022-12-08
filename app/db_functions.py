@@ -6,6 +6,8 @@ import sqlite3
 from datetime import datetime
 DB_FILE="ALC.db" #ALC = Anime Love Calculator 
 
+## Samson: I recommend opening and closing/committing the database in every single function to make it easier in Flask.
+
 def reset_database():
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db
     c = db.cursor() #creates db cursor to execute and fetch           
