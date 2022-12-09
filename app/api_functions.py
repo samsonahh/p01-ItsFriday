@@ -26,5 +26,5 @@ def get_random_quote(character):
 #print('get_random_quote test:\n' + get_random_quote('tanjiro'))
 
 #uses Kitsu API to get anime character image
-def get_image(character):
+# def get_image(character):
     

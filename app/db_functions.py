@@ -22,19 +22,30 @@ def reset_database():
 
 def add_user():
     data = (username, password)
-    db.cursor.execute("INSERT INTO users VALUES(?,?)", data)
+    db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db
+    c = db.cursor() #creates db cursor to execute and fetch           
+
+    c.execute("INSERT INTO users VALUES(?,?)", data)
     db.commit() #Double-check if this is needed
 
-def check_userexists():
-    list = db_cursor.execute("SELECT * FROM users WHERE username=?", (username,)).fetchall()
-    if list == []:
+def check_userexists(username, c):
+    db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db      
+
+    c.execute("SELECT * FROM users WHERE username=?", (username,))
+    dic = fetchall()
+
+    if dic == []:
         return False
     else:
         return True
 
-def check_passwordexists():
-    list = db_cursor.execute("SELECT * FROM users WHERE password=?", (password,)).fetchall()
-    if list == []:
+def get_user_password(username, c):
+    db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db          
+
+    c.execute("SELECT * FROM users WHERE password=?", (password,))
+    dic = fetchall()
+
+    if dic == []:
         return False
     else:
         return True

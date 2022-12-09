@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import requests
 from db_functions import *
 from api_functions import *
+from register_functions import * 
 
 app = Flask(__name__)
 app.secret_key = b'kJu2hlllSnasd8a0a@(@2lask'
@@ -22,17 +23,21 @@ def login():
         c = db.cursor #be able to execute & operate 
         username = request.form['username']
         password = request.form['password']
-        if user_exist(username, c) and get_user_pass(username, c) == password:
+        if check_userexists(username, c) and get_user_password(username, c) == password: #checks if user exists & password matches
             db.close()
             session['username'] = request.form['username']
-            return redirect(url_for('index'))
-        else:
+            return redirect(url_for('home'))
+        if not check_userexists(username, c): #checks if username exists 
             db.close()
-            return render_template('login.html', failmsg='Wrong username and password!')
-    return render_template("login.html")
+            return render_template('login.html', FAILMSG ="Username does not exist")
+        else: 
+            db.close()
+            return render_template('login.html', FAILMSG ="Username and password does not match")
+    return render_template("login.html", FAILMSG = "")
 
 @app.route('/register')
 def register():
+
     return render_template("register.html")
 
 @app.route('/logout')
