@@ -7,7 +7,48 @@ P01
 <html>
     <head>
         <title>Anime Love Calculator: Register</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" integrity="sha512-kDmbIQZ10fxeKP5NSt3+tz77HO42IJiS+YPIirOIKTdokl4LtuXYo3NNvq9mTAF+rzdV1plp0sm9E6nvtVpnFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../static/css/login.css"/>
+        <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     </head>
-
+    <body>
+        <div class = "grid-x">
+            <div class="cell small-2 medium-2 large-2"></div>
+            <div class="cell small-8 medium-8 large-8">
+                <div class="grid-y" style = "height: 100vh;">
+                    <div class = "cell small-2 medium-2 large-2"></div> 
+                    <div class = "cell small-2 medium-2 large-2">
+                        <div class = "card">
+                            <div class = "card-section">
+                                <img src="../static/assets/logo2.png">
+                            </div>
+                            <div class = "card-section" style="height: max(35vh, 400px);">
+                                <h4><b>Sign up</b></h4>
+                                <form method = "POST" action="/activate_login">                                   
+                                        <label for="username">Username:</label>
+                                        <input type="text" name="username" placeholder="Enter username here" id="username">                                       
+                                        <label for="password">Password:</label>
+                                    <input type="password" name="password" placeholder="Enter password here" id="password">
+                                    <br>
+                                    <input type="submit" name="sub1" value = "SUBMIT" class="button expanded"></tr> <!-- submit button -->
+                                </form>
+                                <div class="grid-x">
+                                    <div class="cell small-5 medium-5 large-5"><hr></div>
+                                    <div class="cell small-2 medium-2 large-2"></div>
+                                    <div class="cell small-5 medium-5 large-5"><hr></div>
+                                </div>
+                                <div class="grid-x">
+                                    <div class="cell small-1 medium-2 large-1"><i class="fi-social-github" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-1 medium-2 large-1"><i class="fi-mail" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-8 medium-8 large-8"><i class="fi-social-facebook" style="font-size: 30px;"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="cell small-2 medium-2 large-2"></div>
+        </div>
+    </body>
 </html>
