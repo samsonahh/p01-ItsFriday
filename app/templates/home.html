@@ -12,55 +12,67 @@ P01
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Alegreya' rel='stylesheet'>
     </head>
-<!--                          TITLE AT TOP                             -->
-    <h1 class="text-center"><a href="/">Anime Love Calculator</a></h1>
-<!--                          TITLE AT TOP END                             -->
 
 <!--                          NAVBAR                             -->
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <ul class="menu horizontal">
-                <li><a href="/">Home</a></li>
-                <li><a href="/profile">Character Information</a></li>
-                <li><a href="/match">Match</a></li>
-            </ul>
+        <div class="top-bar" style="background-color: rgb(255, 229, 250, 0.9); position: sticky; top: 0; height: 70px;">
+            <div class="top-bar-left">
+                <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
+                    <li class="menu-text"><a href="/">Anime Love Calculator</a></li>
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
+                    <li class="menu-text">
+                        {% if login_status %}
+                        <a href="/logout">Logout</a>
+                        {% else %}
+                        <a href="/login">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="top-bar-right">
-            <ul class="menu horizontal">
-                <li>
-                    {% if login_status %}
-                    <a href="/logout">Logout</a>
-                    {% else %}
-                    <a href="/login">Login</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </div>
-    </div>
 <!--                          NAVBAR END                            -->
 
 <!--                          LETS GET STARTED CONTAINER                            -->
-    <div class="grid-container fluid">
-        <div class="grid-padding-y" style="height: 500px; padding-left: 400px; padding-right: 400px; padding-top: 100px;">
+    <div class="grid-container fluid" style="background-color: #FFFFFF;">
+        <div class="grid-padding-y" style="height: 90vh; padding-top: 10%;">
             <div>
-                <h2 class="text-center">Let's get started</h2>
+                <h1 class="text-center">Let's get started</h1>
             </div>
             <div>
                 <p class="text-center">
                     Curious about anime character relationships?<br>
-                    Find out whether your anime character is compatible with another character.<br>
                     Start by generating a quote for your anime character!<br>
                 </p>
             </div>
             <div class="text-center">
                 <form id="generate" method="POST">
-                    <input type="text" name="user_quote_query" placeholder="Type in an anime character name." style="display: block; width: 200px; margin: 0 auto;"><br>
+                    <input type="text" name="user_quote_query" placeholder="Character name" style="display: block; width: 200px; margin: 0 auto;"> <br>
                     <button type="submit" class="button">Generate</button>
                 </form>
             </div>
         </div>
     </div>
 <!--                          LETS GET STARTED CONTAINER END                            -->
+
+<!--                          check out matches CONTAINER                            -->
+<div class="grid-container fluid" style="background-color: #FFFFFF;">
+    <div class="grid-padding-y" style="height: 90vh; padding-top: 10%;">
+        <div>
+            <h1 class="text-center">Compatibility</h1>
+        </div>
+        <div>
+            <p class="text-center">
+                Skip straight to matching anime characters
+            </p>
+        </div>
+        <div class="text-center">
+            <a class="button" href="/match">Match</a>
+        </div>
+    </div>
+</div>
+<!--                          check out matches CONTAINER END                            -->
 
 
 </html>
