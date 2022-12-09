@@ -1,0 +1,13 @@
+TNPG: It's Friday!, Roster: Erica Li, Verit Li, Daniel He, Samson Wu
+SoftDev
+P01
+
+TODO LIST (Today):
+1. (DONE) Routes for all the pages (Flask)
+2. (DONE) HTML templates for every page (HTML)
+3. (DONE) db and api functions python modules (PYTHON
+4. (DONE) Get api keys in the keys folder
+5. Write functions that validate register passwords and usernames (FLASK)
+6. Username/Password SQLite database tables (SQLite)
+7. db functions that can communicate with User/Pass tables (SQLite, Python) 
+8. Update any new changes on design doc and devlog

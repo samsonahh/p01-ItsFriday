@@ -21,7 +21,7 @@ h4{
     padding: 0 20px 0 20px;
     border: 0;
     border-radius: 1%;
-    width: max(65vh, 500px);
+    width: max(50vh, 500px);
     opacity: 0%;
     background-image: linear-gradient(168deg, pink, rgba(255,0,0,0) 18%);
     animation: appear;
