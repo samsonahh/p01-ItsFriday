@@ -20,7 +20,7 @@ def reset_database():
     db.commit()
     db.close()
 
-def add_user():
+def add_newuser(username, password):
     data = (username, password)
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db
     c = db.cursor() #creates db cursor to execute and fetch           
