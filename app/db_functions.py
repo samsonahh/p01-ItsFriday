@@ -27,14 +27,14 @@ def add_user():
 
 def check_userexists():
     list = db_cursor.execute("SELECT * FROM users WHERE username=?", (username,)).fetchall()
-    if list = []:
+    if list == []:
         return False
-    else
+    else:
         return True
 
 def check_passwordexists():
     list = db_cursor.execute("SELECT * FROM users WHERE password=?", (password,)).fetchall()
-    if list = []:
+    if list == []:
         return False
-    else
+    else:
         return True

@@ -22,8 +22,13 @@ def login():
         c = db.cursor #be able to execute & operate 
         username = request.form['username']
         password = request.form['password']
-        
-
+        if user_exist(username, c) and get_user_pass(username, c) == password:
+            db.close()
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        else:
+            db.close()
+            return render_template('login.html', failmsg='Wrong username and password!')
     return render_template("login.html")
 
 @app.route('/register')
