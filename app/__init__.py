@@ -37,7 +37,13 @@ def login():
 
 @app.route('/register')
 def register():
+    if request.method == 'POST':
+        db = sqlite3.connect(DB_FILE) #opens if file exists... if not, it will create one
+        c = db.cursor #be able to execute & operate 
+        username = request.form['username']
+        password = request.form['password']
 
+        if 
     return render_template("register.html")
 
 @app.route('/logout')
