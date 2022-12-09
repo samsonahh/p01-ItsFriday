@@ -1,0 +1,48 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../assets/nightscene.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: absolute;
+    max-height: 100vh;
+    overflow-y: hidden;
+    background-color: black;
+    font-family: "Open Sans";
+}
+h6,
+h4{
+    font-family: "Open Sans";
+}
+
+@keyframes appear{
+    from{opacity: 0%; margin-top: -10vh;}
+    to{opacity: 90%;}
+}
+.card-style {
+    padding: 0 20px 0 20px;
+    border: 0;
+    border-radius: 1%;
+    width: max(65vh, 500px);
+    opacity: 0%;
+    background-image: linear-gradient(168deg, pink, rgba(255,0,0,0) 18%);
+    animation: appear;
+    animation-duration: 1.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+input[type=password],
+input[type=text] {
+   background-color: rgb(250, 228, 231);
+}
+
+input:active{
+    outline: none;
+    border:none;
+}
+
+.register{
+    color: rgb(255, 254, 254);
+    background-color: rgb(48, 235, 173);
+    border-radius: 15px;
+    border: 2px solid;
+}
