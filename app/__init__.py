@@ -25,7 +25,8 @@ def login():
         password = request.form['password']
         if check_userexists(username, c) and get_user_password(username, c) == password: #checks if user exists & password matches
             db.close()
-            session['username'] = request.form['username']
+            session['username'] = request.form['username'] #logs in user
+            loginstatus = True 
             return redirect(url_for('home'))
         if not check_userexists(username, c): #checks if username exists 
             db.close()
@@ -40,11 +41,24 @@ def register():
     if request.method == 'POST':
         db = sqlite3.connect(DB_FILE) #opens if file exists... if not, it will create one
         c = db.cursor #be able to execute & operate 
-        username = request.form['username']
-        password = request.form['password']
-
-        if 
-    return render_template("register.html")
+        new_username = request.form['username']
+        new_password = request.form['password']
+    
+        if check_userexists(new_username, c): #checks if the username is already taken
+            return render_template("register.html", FAILMSG="Username already exists")
+        
+        if check_usernamerequirements(new_username): #checks if the username fulfills reqs 
+            return render_template("register.html", FAILMSG="Username is not long enough")
+       
+        if check_passwordrequirements(new_password): #checks if the password fulfills reqs
+            return render_template("register.html", FAILMSG="Password is not long enough")
+       
+        else:
+            add_newuser(new_username, new_password) #adds user to the database
+            session['username'] = request.form['username'] #logs in user
+            loginstatus = True 
+            return redirect(url_for('home'))
+    return render_template("register.html", FAILMSG="")
 
 @app.route('/logout')
 def logout():
