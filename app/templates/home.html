@@ -12,82 +12,83 @@ P01
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="../static/css/home.css"/>
     </head>
-
-<!--                          NAVBAR                             -->
-        <div class="top-bar" style="background-color: rgb(255, 229, 250); position: sticky; top: 0; height: 10vh;">
-            <div class="top-bar-left">
-                <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
-                    <li class="menu-text"><a href="/">Anime Love Calculator</a></li>
-                </ul>
+    <body>
+        <div style="scroll-snap-align: start;">
+    <!--                          NAVBAR                             -->
+            <div class="top-bar" style="background-color: rgb(255, 229, 250); position: sticky; top: 0; height: 10vh;">
+                <div class="top-bar-left">
+                    <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
+                        <li class="menu-text"><a href="/">Anime Love Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
+                        <li class="menu-text">
+                            {% if login_status %}
+                            <a href="/logout">Logout</a>
+                            {% else %}
+                            <a href="/login">Login</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="top-bar-right">
-                <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
-                    <li class="menu-text">
-                        {% if login_status %}
-                        <a href="/logout">Logout</a>
-                        {% else %}
-                        <a href="/login">Login</a>
-                        {% endif %}
-                    </li>
-                </ul>
+    <!--                          NAVBAR END                            -->
+
+    <!--                          LETS GET STARTED CONTAINER                            -->
+        <div class="grid-container fluid paralarx" style="background-color: #FFFFFF;">
+            <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
+                <div class = "cell large-10">
+                    <div>
+                        <h1 class="text-center Letsgo">Let's get started</h1>
+                    </div>
+                    <div>
+                        <p class="text-center" style="color: aliceblue;">
+                            Curious about anime character relationships?<br>
+                            Start by generating a quote for your anime character!<br>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <form id="generate" method="POST">
+                            <input type="text" name="user_quote_query" placeholder="Character name" style="display: block; width: 200px; margin: 0 auto;"> <br>
+                            <button type="submit" class="button">Generate</button>
+                        </form>
+                    </div>
+                </div>
+                <div class = "cell large-2" style="text-align: center;">
+                    <i class="fi-arrow-down iconica"></i>
+                </div>
             </div>
         </div>
-<!--                          NAVBAR END                            -->
-
-<!--                          LETS GET STARTED CONTAINER                            -->
-    <div class="grid-container fluid paralarx" style="background-color: #FFFFFF; scroll-behavior: smooth;">
-        <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
-            <div class = "cell large-10">
-                <div>
-                    <h1 class="text-center Letsgo">Let's get started</h1>
-                </div>
-                <div>
-                    <p class="text-center">
-                        Curious about anime character relationships?<br>
-                        Start by generating a quote for your anime character!<br>
-                    </p>
-                </div>
-                <div class="text-center">
-                    <form id="generate" method="POST">
-                        <input type="text" name="user_quote_query" placeholder="Character name" style="display: block; width: 200px; margin: 0 auto;"> <br>
-                        <button type="submit" class="button">Generate</button>
-                    </form>
-                </div>
-            </div>
-            <div class = "cell large-2" style="text-align: center;">
-                <i class="fi-arrow-down iconica"></i>
-            </div>
-        </div>
-    </div>
-<!--                          LETS GET STARTED CONTAINER END                            -->
-
-<!--                          check out matches CONTAINER                            -->
-    <div class="grid-x paralarx">
-        <div class="cell small-1 medium-1 large-1" style="background-color:#ffffff00;"></div>
-        <div class="cell small-10 medium-10 large-10">
-            <div class="grid-container fluid" style="background-color: #FFFFFF;">
-                <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
-                    <div class="cell small-12 medium-12 large-12">
+    <!--                          LETS GET STARTED CONTAINER END                            -->
+</div>
+    <!--                          check out matches CONTAINER                            -->
+        <div class="grid-x paralarx" style="scroll-snap-align: start;">
+            <div class="cell small-1 medium-1 large-1" style="background-color:#ffffff00;"></div>
+            <div class="cell small-10 medium-10 large-10">
+                <div class="grid-container fluid" style="background-color: #FFFFFF;">
+                    <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
+                        <div class="cell small-12 medium-12 large-12">
+                        
+                            <div>
+                                <h1 class="text-center">Compatibility</h1>
+                            </div>
+                            <div>
+                                <p class="text-center">
+                                    Skip straight to matching anime characters
+                                </p>
+                            </div>
+                            <div class="text-center">
+                                <a class="button" href="/match">Match</a>
+                            </div>
                     
-                        <div>
-                            <h1 class="text-center">Compatibility</h1>
                         </div>
-                        <div>
-                            <p class="text-center">
-                                Skip straight to matching anime characters
-                            </p>
-                        </div>
-                        <div class="text-center">
-                            <a class="button" href="/match">Match</a>
-                        </div>
-                
                     </div>
                 </div>
             </div>
+            <div class="cell small-1 medium-1 large-1" style="opacity: 0;"></div>
         </div>
-        <div class="cell small-1 medium-1 large-1" style="opacity: 0;"></div>
-    </div>
-<!--                          check out matches CONTAINER END                            -->
-
+    <!--                          check out matches CONTAINER END                            -->
+    </body>
 
 </html>

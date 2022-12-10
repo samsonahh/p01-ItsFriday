@@ -1,3 +1,9 @@
+html { 
+    scroll-snap-type: y mandatory;
+}
+body { 
+    scroll-snap-type: y mandatory;
+}
 .paralarx{
     height: 90vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../assets/prntscrn.png");
