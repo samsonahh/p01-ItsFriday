@@ -56,3 +56,11 @@ input:active{
     border-radius: 15px;
     border: 2px solid;
 }
+
+.hovered{
+    background-color:rgb(48, 235, 173)
+}
+
+.hovered:hover{
+    background-color:rgb(5, 187, 126)
+}

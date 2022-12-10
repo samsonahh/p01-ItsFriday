@@ -3,11 +3,16 @@
 # P01
 
 from flask import Flask, render_template, request, session, redirect, url_for
+import sqlite3
 import requests
 from db_functions import *
 from api_functions import *
 from register_functions import * 
+########## NOTES ###########
 
+# Tables for database need to be created first before login/ register works 
+
+########## NOTES ###########
 app = Flask(__name__)
 app.secret_key = b'kJu2hlllSnasd8a0a@(@2lask'
 
@@ -16,11 +21,11 @@ def home():
     loginstatus = False #Samson: We should check session whether user is logged in
     return render_template("home.html", login_status = loginstatus)
 
-@app.route('/login') #, methods=['POST'])
+@app.route('/login', methods=['GET', 'POST']) #, methods=['POST'])
 def login():
     if request.method == 'POST':
-        db = sqlite3.connect(DB_FILE) #opens if file exists... if not, it will create one
-        c = db.cursor #be able to execute & operate 
+        db = sqlite3.connect(DB_FILE, check_same_thread=False) #opens if file exists... if not, it will create one
+        c = db.cursor() #be able to execute & operate 
         username = request.form['username']
         password = request.form['password']
         if check_userexists(username, c) and get_user_password(username, c) == password: #checks if user exists & password matches
@@ -36,11 +41,12 @@ def login():
             return render_template('login.html', FAILMSG ="Username and password does not match")
     return render_template("login.html", FAILMSG = "")
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        db = sqlite3.connect(DB_FILE) #opens if file exists... if not, it will create one
-        c = db.cursor #be able to execute & operate 
+        print("checkpoint!")
+        db = sqlite3.connect(DB_FILE, check_same_thread=False) #opens if file exists... if not, it will create one
+        c = db.cursor() #be able to execute & operate 
         new_username = request.form['username']
         new_password = request.form['password']
     
