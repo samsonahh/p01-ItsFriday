@@ -66,3 +66,10 @@ EricaL -- 2022-12-9 14:15
 Finished login function in db and main python file. 
 Finished register function in db and main python file. 
 ==============================================================
+
+danielH -- 2022-12-10 17:56
+--------------------------------------------------------------
+Worked on Homepage.html css
+Fixed some syntax bugs for database connection in ROUTES
+Worked on an API funtion to generate a random anime profile 
+==============================================================
