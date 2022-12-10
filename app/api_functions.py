@@ -22,9 +22,28 @@ def get_random_quote(character):
     res = requests.get(url) 
     json = res.json() 
     quote = json['quote']
+    #character = json['character']
     return quote
 #print('get_random_quote test:\n' + get_random_quote('tanjiro'))
-
 #uses Kitsu API to get anime character image
-# def get_image(character):
+#def get_image(character):
+    # url =  "https://kitsu.io/api/edge/characters?"
+    # res = requests.get(url, params={"filter[name]": character})
+    # return res.json()
+
+#uses AnimeChan API to get a random character and their quotes and their information from Kitsu API
+def get_random_profile():
+    AnimeChan_url = 'https://animechan.vercel.app/api/random'
+    res = requests.get(AnimeChan_url) 
+    json = res.json() 
+    quote = json['quote']
+    character = json['character']
+    url =  "https://kitsu.io/api/edge/characters?"
+    res = requests.get(url, params={"filter[name]": character})
+    return res.json()
+#print(get_random_profile())
+
+
+
+
     
