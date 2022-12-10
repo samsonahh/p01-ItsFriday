@@ -19,17 +19,30 @@ P01
                 <div class="grid-y" style = "height: 100vh;">
                     <div class = "cell small-2 medium-2 large-2"></div> 
                     <div class = "cell small-2 medium-2 large-2">
-                        <div class = "card">
+                        <div class = "card card-style-register">
                             <div class = "card-section">
-                                <img src="../static/assets/logo2.png">
+                                <div class="grid-x">
+                                    <div class="cell small-2 medium-2 large-2"></div>
+                                    <div class="cell small-8 medium-8 large-8"><img src="../static/assets/logo2.png"></div>
+                                    <div class="cell small-2 medium-2 large-2"></div>
+                                </div>
                             </div>
                             <div class = "card-section" style="height: max(35vh, 400px);">
                                 <h4><b>Sign up</b></h4>
                                 <form method = "POST" action="/activate_login">                                   
                                         <label for="username">Username:</label>
-                                        <input type="text" name="username" placeholder="Enter username here" id="username">                                       
-                                        <label for="password">Password:</label>
-                                    <input type="password" name="password" placeholder="Enter password here" id="password">
+                                        <input type="text" name="username" placeholder="Enter username here" id="username"> 
+                                        <div class="grid-x">
+                                            <div class="cell small-6 medium-6 large-6" style="padding-right: 5px;">
+                                                <label for="password">Password:</label>
+                                                <input type="password" name="password" placeholder="Enter password here" id="password">
+                                            </div>
+                                            <div class="cell small-6 medium-6 large-6" style="padding-left: 5px;">
+                                                <label for="password">Confirm Password:</label>
+                                                <input type="password" name="password" placeholder="Enter password here" id="password">
+                                            </div>
+                                        </div>                                      
+                                        
                                     <br>
                                     <input type="submit" name="sub1" value = "SUBMIT" class="button expanded"></tr> <!-- submit button -->
                                 </form>
@@ -39,9 +52,11 @@ P01
                                     <div class="cell small-5 medium-5 large-5"><hr></div>
                                 </div>
                                 <div class="grid-x">
-                                    <div class="cell small-1 medium-2 large-1"><i class="fi-social-github" style="font-size: 30px;"></i></div>
-                                    <div class="cell small-1 medium-2 large-1"><i class="fi-mail" style="font-size: 30px;"></i></div>
-                                    <div class="cell small-8 medium-8 large-8"><i class="fi-social-facebook" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-1 medium-1 large-1"><i class="fi-social-github" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-1 medium-1 large-1"><i class="fi-mail" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-1 medium-1 large-1"><i class="fi-social-facebook" style="font-size: 30px;"></i></div>
+                                    <div class="cell small-9 medium-9 large-9 text-right" style="padding: 10px 0;">Already have an account? <a href="login.html">Log in</a></div>
+                                    
                                 </div>
                             </div>
                         </div>

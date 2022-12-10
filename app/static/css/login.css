@@ -26,10 +26,20 @@ h4{
     background-image: linear-gradient(168deg, pink, rgba(255,0,0,0) 18%);
     animation: appear;
     animation-duration: 1.5s;
-    animation-delay: 0.5s;
+    animation-delay: 0.2s;
     animation-fill-mode: forwards;
 }
-
+.card-style-register {
+    padding: 0 20px 0 20px;
+    border: 0;
+    border-radius: 1%;
+    opacity: 0%;
+    background-image: linear-gradient(168deg, pink, rgba(255,0,0,0) 18%);
+    animation: appear;
+    animation-duration: 1.5s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+}
 input[type=password],
 input[type=text] {
    background-color: rgb(250, 228, 231);
