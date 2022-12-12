@@ -23,13 +23,16 @@ P01
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
-                        <li class="menu-text">
-                            {% if login_status %}
-                            <a href="/logout">Logout</a>
-                            {% else %}
-                            <a href="/login">Login</a>
-                            {% endif %}
-                        </li>
+                        {% if login_status %}
+                            <li class="menu-text">{{session_username}}</li>
+                            <li class="menu-text">
+                                <a href="/logout">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="menu-text">
+                                <a href="/login">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

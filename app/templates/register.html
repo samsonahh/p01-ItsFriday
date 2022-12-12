@@ -32,15 +32,15 @@ P01
                                 <form method = "POST" action="/register">    
                                     <!--                          RELEVANT FORMS                             -->                               
                                         <label for="username">Username:</label>
-                                        <input type="text" name="username" placeholder="Enter username here" id="username"> 
+                                        <input type="text" name="register_username" placeholder="Enter username here" id="username"> 
                                         <div class="grid-x">
                                             <div class="cell small-6 medium-6 large-6" style="padding-right: 5px;">
                                                 <label for="password">Password:</label>
-                                                <input type="password" name="password" placeholder="Enter password here" id="password">
+                                                <input type="password" name="register_password" placeholder="Enter password here" id="password">
                                             </div>
                                             <div class="cell small-6 medium-6 large-6" style="padding-left: 5px;">
                                                 <label for="password">Confirm Password:</label>
-                                                <input type="password" name="password" placeholder="Enter password here" id="password">
+                                                <input type="password" name="register_password_confirm" placeholder="Enter password here" id="password">
                                             </div>
                                         </div>                                      
 
@@ -59,7 +59,7 @@ P01
                                     <div class="cell small-1 medium-1 large-1"><i class="fi-mail" style="font-size: 30px;"></i></div>
                                     <div class="cell small-1 medium-1 large-1"><i class="fi-social-facebook" style="font-size: 30px;"></i></div>
                                     <div class="cell small-9 medium-9 large-9 text-right" style="padding: 10px 0;">Already have an account? <a href="/login">Log in</a></div>
-                                    
+                                    {{FAILMSG}}
                                 </div>
                             </div>
                         </div>
