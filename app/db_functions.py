@@ -39,7 +39,7 @@ def check_userexists(username):
     dic = c.fetchone()
 
     return dic[1] #returns a password for the given username
-    else:
+    else
         return ("User does not exist")
 
     db.commit()
