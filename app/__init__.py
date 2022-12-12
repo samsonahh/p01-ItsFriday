@@ -66,7 +66,7 @@ def register():
         if not check_passwordrequirements(new_password): #checks if the password fulfills reqs
             return render_template("register.html", FAILMSG="Password is not long enough")
 
-        if not new_password == new_password_confirm:
+        if not new_password == new_password_confirm: #checks if the password matches the confirmation password
             return render_template("register.html", FAILMSG="Passwords don't match!")
        
         add_newuser(new_username, new_password) #adds user to the database

@@ -58,6 +58,14 @@ def get_user_password(username):
 
     return dict[1]
 
+#for future uses 
+def update_history(username): 
+    now = datetime.now()
+    dt_string = now.strftime("%B %d , %Y %H:%M:%S")
+    data = (username, dt_string)
+
+    c.execute("INSERT INTO history VALUES(?,?)", data)
+
 def generate_preset_database():
     reset_database()
     add_newuser('samson', 'samson123')

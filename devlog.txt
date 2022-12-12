@@ -83,3 +83,9 @@ samsonW -- 2022-12-12 14:48
 --------------------------------------------------------------
 Bug fixed login, register, db_functions. All should be working now.
 ==============================================================
+
+EricaL -- 2022-12-12 15:19
+--------------------------------------------------------------
+Added new function in db_functions for history for future uses, 
+once match & profile is finalized. Added comments for register.
+==============================================================
