@@ -13,9 +13,11 @@ def reset_database():
     c = db.cursor() #creates db cursor to execute and fetch           
 
     c.execute("DROP TABLE IF EXISTS users;")
+    c.execute("DROP TABLE IF EXISTS history;")
 
     #users table stores the username and password
     c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT, password TEXT);")
+    c.execute("CREATE TABLE IF NOT EXISTS history(username TEXT, datetime TEXT);")
 
     db.commit()
     db.close()
@@ -32,7 +34,7 @@ def check_userexists(username):
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db      
 
     c.execute("SELECT * FROM users WHERE username=?", (username,))
-    dic = fetchall()
+    dic = c.fetchall()
 
     if dic == []:
         return False
@@ -43,9 +45,11 @@ def get_user_password(username):
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db          
 
     c.execute("SELECT * FROM users WHERE password=?", (password,))
-    dic = fetchall()
+    dic = c.fetchall()
 
     if dic == []:
         return False
     else:
         return True
+
+
