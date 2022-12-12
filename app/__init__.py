@@ -28,7 +28,7 @@ def login():
         c = db.cursor() #be able to execute & operate 
         username = request.form['username']
         password = request.form['password']
-        if check_userexists(username, c) and get_user_password(username, c) == password: #checks if user exists & password matches
+        if check_userexists(username) and get_user_password(username) == password: #checks if user exists & password matches
             db.close()
             session['username'] = request.form['username'] #logs in user
             loginstatus = True 
@@ -50,7 +50,7 @@ def register():
         new_username = request.form['username']
         new_password = request.form['password']
     
-        if check_userexists(new_username, c): #checks if the username is already taken
+        if check_userexists(new_username): #checks if the username is already taken
             return render_template("register.html", FAILMSG="Username already exists")
         
         if check_usernamerequirements(new_username): #checks if the username fulfills reqs 

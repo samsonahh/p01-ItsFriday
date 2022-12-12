@@ -28,7 +28,7 @@ def add_newuser(username, password):
     c.execute("INSERT INTO users VALUES(?,?)", data)
     db.commit() #Double-check if this is needed
 
-def check_userexists(username, c):
+def check_userexists(username):
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db      
 
     c.execute("SELECT * FROM users WHERE username=?", (username,))
@@ -39,7 +39,7 @@ def check_userexists(username, c):
     else:
         return True
 
-def get_user_password(username, c):
+def get_user_password(username):
     db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db          
 
     c.execute("SELECT * FROM users WHERE password=?", (password,))
