@@ -73,3 +73,8 @@ Worked on Homepage.html css
 Fixed some syntax bugs for database connection in ROUTES
 Worked on an API funtion to generate a random anime profile 
 ==============================================================
+
+samsonW -- 2022-12-12 13:54
+--------------------------------------------------------------
+Added .gitignore for cache and db files to prevent merge conflicts.
+==============================================================
