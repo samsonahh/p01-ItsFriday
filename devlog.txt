@@ -67,6 +67,11 @@ Finished login function in db and main python file.
 Finished register function in db and main python file. 
 ==============================================================
 
+veritL -- 2022-12-9 14:17
+--------------------------------------------------------------
+Created functions for checking username and password requirements when signing up in register_functions.py.
+==============================================================
+
 danielH -- 2022-12-10 17:56
 --------------------------------------------------------------
 Worked on Homepage.html css
