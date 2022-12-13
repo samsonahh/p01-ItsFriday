@@ -30,6 +30,8 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
+        if request.method == 'POST':
+            
     return render_template("home.html", login_status = loginstatus, session_username = sessionusername)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -124,6 +126,20 @@ def match_search(media, input, page):
     for i in diction:
         print (i)
     return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None)
+
+@app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
+def search_results(media, input, page):
+    loginstatus = False
+    sessionusername = ''
+    if 'username' in session:
+        loginstatus = True
+        sessionusername = session['username']
+        if media == 'Character':
+            diction = api.pagination(input, page)
+            return render_template("home.html", login_status = loginstatus, session_username = sessionusername, diction = diction)
+    for i in diction:
+        print (i)
+    return render_template("home.html", login_status = loginstatus, session_username = sessionusername, diction = None)
 
 @app.route('/compatibility')
 def compatibility():
