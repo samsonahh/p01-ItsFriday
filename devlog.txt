@@ -94,3 +94,10 @@ EricaL -- 2022-12-12 15:19
 Added new function in db_functions for history for future uses, 
 once match & profile is finalized. Added comments for register.
 ==============================================================
+
+danielH -- 2022-12-12 23:54
+--------------------------------------------------------------
+Worked on match.html and added jinja stuff to display search 
+results, created api functions to return needed data, created 
+match routes, implemented pagination.
+==============================================================

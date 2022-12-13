@@ -37,7 +37,6 @@ def get_random_profile():
     AnimeChan_url = 'https://animechan.vercel.app/api/random'
     res = requests.get(AnimeChan_url) 
     json = res.json() 
-    quote = json['quote']
     character = json['character'] #Use accurate name returned by animechan to search in Kitsu API
     url =  "https://kitsu.io/api/edge/characters?"
     res = requests.get(url, params={"filter[name]": character})
@@ -52,8 +51,57 @@ def get_random_profile():
     res = requests.get(AnimeChan_url_ten) 
     json = res.json()
     quotes = []
-    for a in json:
-        quotes.append(a['quote'])
-    return json
+    for data in json:
+        quotes.append(data['quote'])
+    return {"name": en_name, "description": description, "image": image, "quotes": quotes}
 
-print(get_random_profile())
+def query_character(input):
+    print("Keep in mind the API limit!")
+    url =  "https://kitsu.io/api/edge/characters?"
+    res = requests.get(url, params={"filter[name]": input})
+    json = res.json()
+    output = []
+    for data in json["data"]: 
+        en_name = data["attributes"]["names"]["en"]
+        # if data["attributes"]["names"]["ja_jp"] is None: 
+        #     jp_name = "None"
+        # else: 
+        #     jp_name = data["attributes"]["names"]["ja_jp"]
+        description = data["attributes"]["description"]
+        print (description)
+        if data["attributes"]["image"] is None:
+            image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+        else :
+            image = data["attributes"]["image"]["original"]
+        output.append({"name": en_name, "description": description, "image": image})
+    return output 
+
+def pagination(input, page):
+    print("Keep in mind the API limit!")
+    page = int(page)
+    if page < 0:
+        page = 0
+    page = page * 10
+    # print (page)
+    # print(123//10 + 1)
+    url =  f"https://kitsu.io/api/edge/characters?page[limit]=10&page[offset]={page}"
+    res = requests.get(url, params={"filter[name]": input})
+    json = res.json()
+    print(json)
+    output = []
+    max = json["meta"]['count']
+    for data in json["data"]: 
+        en_name = data["attributes"]["names"]["en"]
+        # Sometimes jp name is null...
+        # if data["attributes"]["names"]["ja_jp"] is None: 
+        #     jp_name = "None"
+        # else: 
+        #     jp_name = data["attributes"]["names"]["ja_jp"]
+        description = data["attributes"]["description"]
+        print (description)
+        if data["attributes"]["image"] is None:
+            image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+        else :
+            image = data["attributes"]["image"]["original"]
+        output.append({"name": en_name, "description": description, "image": image})
+    return (output, max) # use max to figure out pagination 

@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 import requests
 from db_functions import *
-#from api_functions import *
+import api_functions as api
 from register_functions import * 
 ########## NOTES ###########
 
@@ -89,14 +89,35 @@ def profile():
         sessionusername = session['username']
     return render_template("profile.html", login_status = loginstatus, session_username = sessionusername)
 
-@app.route('/match')
+@app.route('/match', methods=['GET', 'POST'])
 def match():
     loginstatus = False
     sessionusername = ''
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
+        if request.method == 'POST': # process searching functionality for character in match.html
+            if 'max' in session:
+                session.pop('max', None) 
+            if len(request.form['input']) > 0: # checks if the input is blank
+                return redirect(url_for("match_search", input = request.form['input'], media = request.form['media'], page = 0))
     return render_template("match.html", login_status = loginstatus, session_username = sessionusername)
+
+@app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
+def match_search(media, input, page):
+    loginstatus = False
+    sessionusername = ''
+    if 'username' in session:
+        loginstatus = True
+        sessionusername = session['username']
+        print (input)
+        print (media)
+        if media == 'Character':
+            diction = api.pagination(input, page)
+            print("checkpoint 1")
+    for i in diction:
+        print (i)
+    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction)
 
 @app.route('/compatibility')
 def compatibility():
