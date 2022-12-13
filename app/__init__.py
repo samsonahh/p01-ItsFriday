@@ -10,7 +10,11 @@ import api_functions as api
 from register_functions import * 
 ########## NOTES ###########
 
-# Samson: fixed a lot of bugs
+# OUR PRESET ACCOUNTS:
+# samson: samson123
+# daniel: daniel123
+# erica: erica123
+# verit: verit123
 
 ########## NOTES ###########
 
@@ -69,6 +73,7 @@ def register():
         if not new_password == new_password_confirm: #checks if the password matches the confirmation password
             return render_template("register.html", FAILMSG="Passwords don't match!")
        
+        #if all the if statements above fail, do the last case: register the user to the database and logs in
         add_newuser(new_username, new_password) #adds user to the database
         session['username'] = new_username #logs in user
         return redirect(url_for('home'))
@@ -76,7 +81,7 @@ def register():
 
 @app.route('/logout')
 def logout():
-    # remove the username from the session if it's there
+    # remove the username from the session/cookie if it's there
     session.pop('username', None)
     return redirect(url_for('home'))
 

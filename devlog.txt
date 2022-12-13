@@ -101,3 +101,8 @@ Worked on match.html and added jinja stuff to display search
 results, created api functions to return needed data, created 
 match routes, implemented pagination.
 ==============================================================
+
+samsonW -- 2022-12-13 8:34
+--------------------------------------------------------------
+Added redirect back to home in login and register. Changed key paths so that the Flask app could be run from root dir.
+==============================================================

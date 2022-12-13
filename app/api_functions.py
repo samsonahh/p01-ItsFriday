@@ -5,13 +5,13 @@
 import requests
 
 #get all the keys
-with open('keys/key_HuggingFace.txt', 'r') as f:
+with open('app/keys/key_HuggingFace.txt', 'r') as f:
     KEY_HuggingFace = f.read()
 
-with open('keys/key_LoveCalculator.txt', 'r') as f:
+with open('app/keys/key_LoveCalculator.txt', 'r') as f:
     KEY_LoveCalculator = f.read()
 
-with open('keys/key_MyAnimeList.txt', 'r') as f:
+with open('app/keys/key_MyAnimeList.txt', 'r') as f:
     KEY_MyAnimeList = f.read()
 
 #print(KEY_HuggingFace)
