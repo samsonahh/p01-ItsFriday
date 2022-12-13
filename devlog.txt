@@ -104,5 +104,14 @@ match routes, implemented pagination.
 
 samsonW -- 2022-12-13 8:34
 --------------------------------------------------------------
-Added redirect back to home in login and register. Changed key paths so that the Flask app could be run from root dir.
+Added redirect back to home in login and register. Changed key 
+paths so that the Flask app could be run from root dir.
+==============================================================
+
+ALL -- 2022-13-2022 14:03
+--------------------------------------------------------------
+    * ALL: Edited design plan 
+    * Samson: fixed bugs 
+    * Daniel: Worked on search feature & match
+    * Verit & Erica: Worked on home search feature & profile 
 ==============================================================
