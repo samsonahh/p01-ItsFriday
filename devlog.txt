@@ -115,3 +115,9 @@ ALL -- 2022-13-2022 14:03
     * Daniel: Worked on search feature & match
     * Verit & Erica: Worked on home search feature & profile 
 ==============================================================
+
+EricaL -- 2022-12-14 1:31
+--------------------------------------------------------------
+Edited wording in home.html (minor change)
+Started character_profile in Flask for profile.html
+==============================================================

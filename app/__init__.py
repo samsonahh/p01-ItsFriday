@@ -105,7 +105,8 @@ def match():
         sessionusername = session['username']
         if request.method == 'POST': # process searching functionality for character in match.html
             if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("match_search", input = request.form['input'], media = request.form['media'], page = 0))
+                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
+        
         if request.method == 'GET':
             if 'id' in request.args:
                 return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
@@ -133,7 +134,7 @@ def match_search_show_character(id, page):
         return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = "Character")
     return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
 
-@app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
+@app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders for character searching 
 def search_results(media, input, page):
     loginstatus = False
     sessionusername = ''
@@ -146,6 +147,16 @@ def search_results(media, input, page):
     for i in diction:
         print (i)
     return render_template("home.html", login_status = loginstatus, session_username = sessionusername, diction = None)
+
+@app.route('/profiles/<media>/<input>', methods=['GET', 'POST']) #character profiles 
+def character_profile(media, input):
+    loginstatus = False
+    sessionusername = ''
+    if 'username' in session:
+        loginstatus = True
+        sessionusername = session['username']
+    return render_template("profile.html", login_status = loginstatus, session_username = sessionusername)
+
 
 @app.route('/compatibility')
 def compatibility():
