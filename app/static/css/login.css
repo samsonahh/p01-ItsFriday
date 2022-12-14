@@ -64,3 +64,8 @@ input:active{
 .hovered:hover{
     background-color:rgb(5, 187, 126)
 }
+
+.alert{
+    color: red;
+    font-weight: bold;
+}

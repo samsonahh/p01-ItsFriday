@@ -29,7 +29,6 @@ P01
                             </div>
                             <div class = "card-section" style="height: max(55vh, 400px);">
                                 <h4><b>Sign up</b></h4>
-                                {{FAILMSG}}
                                 <form method = "POST" action="/register">    
                                     <!--                          RELEVANT FORMS                             -->                               
                                         <label for="username">Username:</label>
@@ -48,6 +47,7 @@ P01
                                     <br>
                                     <input type="submit" name="sub1" value = "Register" class="button expanded hovered"></tr> <!-- submit button -->
                                 </form>
+                                <div class="alert">{{ FAILMSG }}</div>
                                     <!--                          RELEVANT FORMS                             -->                               
 
                                 <div class="grid-x">
