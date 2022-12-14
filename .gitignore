@@ -1,4 +1,4 @@
 app/__pycache__/
 app/ALC.db
 ALC.db
-app/keys
+app/keys/
