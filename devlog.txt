@@ -108,10 +108,18 @@ Added redirect back to home in login and register. Changed key
 paths so that the Flask app could be run from root dir.
 ==============================================================
 
-ALL -- 2022-13-2022 14:03
+ALL -- 2022-13-13 14:03
 --------------------------------------------------------------
     * ALL: Edited design plan 
     * Samson: fixed bugs 
     * Daniel: Worked on search feature & match
     * Verit & Erica: Worked on home search feature & profile 
+==============================================================
+
+danielH -- 2022-12-13 22:37
+--------------------------------------------------------------
+Touched up match.html. Implemented a new route and new API
+functions to allow users to search for anime shows, select 
+anime, and recieve all characters from a specific anime.
+PROBLEM: the api is a bit outdated, informed up until 2016  
 ==============================================================
