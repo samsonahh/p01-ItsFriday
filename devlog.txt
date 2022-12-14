@@ -122,4 +122,9 @@ Touched up match.html. Implemented a new route and new API
 functions to allow users to search for anime shows, select 
 anime, and recieve all characters from a specific anime.
 PROBLEM: the api is a bit outdated, informed up until 2016  
+
+EricaL -- 2022-12-14 1:31
+--------------------------------------------------------------
+Edited wording in home.html (minor change)
+Started character_profile in Flask for profile.html
 ==============================================================
