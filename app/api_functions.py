@@ -76,21 +76,83 @@ def query_character(input):
         output.append({"name": en_name, "description": description, "image": image})
     return output 
 
-def pagination(input, page):
-    print("Keep in mind the API limit!")
+def helper_page_format(page): # page is given as a string, convert into int. Page used as the value of offset attribute in Kitsu API calls 
     page = int(page)
     if page < 0:
         page = 0
-    page = page * 10
+    return page * 12 # the page "offset" needs to be 12 because each page displays 12 items 
+
+def pagination(input, page):
+    print("Keep in mind the API limit!")
+    page = helper_page_format(page)
     # print (page)
     # print(123//10 + 1)
-    url =  f"https://kitsu.io/api/edge/characters?page[limit]=10&page[offset]={page}"
+    url =  f"https://kitsu.io/api/edge/characters?page[limit]=12&page[offset]={page}"
     res = requests.get(url, params={"filter[name]": input})
     json = res.json()
-    print(json)
     output = []
     max = json["meta"]['count']
     for data in json["data"]: 
+        id = data["id"]
+        en_name = data["attributes"]["names"]["en"]
+        # Sometimes jp name is null...
+        # if data["attributes"]["names"]["ja_jp"] is None: 
+        #     jp_name = "None"
+        # else: 
+        #     jp_name = data["attributes"]["names"]["ja_jp"]
+        description = data["attributes"]["description"]
+        if data["attributes"]["image"] is None:
+            image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+        else :
+            image = data["attributes"]["image"]["original"]
+        output.append({"name": en_name, "description": description, "image": image, "id": id})
+    return (output, max) # use max to figure out pagination 
+
+def pagination_with_media(input, page, media):
+    print("Keep in mind the API limit!")
+    page = helper_page_format(page)
+    output = []
+    if media == 'Character':
+        return pagination(input, page)
+    elif media == 'Show':
+        url = f"https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]={page}"
+        res = requests.get(url, params={"filter[text]": input})
+        json = res.json()
+        max = json["meta"]['count']
+        for data in json["data"]:
+            id = data['id']
+            en_name = data["attributes"]["canonicalTitle"]
+            synopsis = data["attributes"]["synopsis"]
+            average_rating = data["attributes"]["averageRating"]
+            start_date = data["attributes"]["startDate"]
+            if data["attributes"]["posterImage"] is None:
+                image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+            else :
+                image = data["attributes"]["posterImage"]["original"]
+            if data["attributes"]["coverImage"] is None:
+                cover_image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+            else :
+                cover_image = data["attributes"]["coverImage"]["original"]
+           # characters = data["relationships"]["characters"]["links"]["related"]
+            output.append({"title" : en_name, "synopsis": synopsis, "rating": average_rating, "date": start_date, "image": image, "cover": cover_image, 'id': id})
+    else: 
+        max = 0
+        print ("Dangerous!")
+    return (output, max) # use max to figure out pagination 
+
+def pagination_id(id, page):
+    page = helper_page_format(page)
+    url = f"https://kitsu.io/api/edge/anime/{id}/anime-characters?page[limit]=12&page[offset]={page}"
+    res = requests.get(url)
+    json = res.json()
+    max = json["meta"]['count']
+    output = []
+    for data in json["data"]:
+        character_url = data["relationships"]["character"]["links"]["related"]
+        res = requests.get(character_url)
+        json = res.json()
+        data = json['data']
+        id = data["id"]
         en_name = data["attributes"]["names"]["en"]
         # Sometimes jp name is null...
         # if data["attributes"]["names"]["ja_jp"] is None: 
@@ -103,50 +165,5 @@ def pagination(input, page):
             image = "https://media.kitsu.io/characters/images/8266/original.jpg"
         else :
             image = data["attributes"]["image"]["original"]
-        output.append({"name": en_name, "description": description, "image": image})
-    return (output, max) # use max to figure out pagination 
-
-def pagination_with_media(input, page, media):
-    print("Keep in mind the API limit!")
-    page = int(page)
-    if page < 0:
-        page = 0
-    page = page * 10
-    output = []
-    if media == 'Character':
-        url =  f"https://kitsu.io/api/edge/characters?page[limit]=10&page[offset]={page}"
-        res = requests.get(url, params={"filter[name]": input})
-        json = res.json()
-        max = json["meta"]['count']
-        for data in json["data"]: 
-            en_name = data["attributes"]["names"]["en"]
-            description = data["attributes"]["description"]
-            if data["attributes"]["image"] is None:
-                image = "https://media.kitsu.io/characters/images/8266/original.jpg"
-            else :
-                image = data["attributes"]["image"]["original"]
-            output.append({"name": en_name, "description": description, "image": image})
-    elif media == 'Show':
-        url = f"https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]={page}"
-        res = requests.get(url, params={"filter[text]": input})
-        json = res.json()
-        max = json["meta"]['count']
-        for data in json["data"]:
-            en_name = data["attributes"]["titles"]["en"]
-            synopsis = data["attributes"]["synopsis"]
-            average_rating = data["attributes"]["averageRating"]
-            start_date = data["attributes"]["startDate"]
-            if data["attributes"]["posterImage"] is None:
-                image = "https://media.kitsu.io/characters/images/8266/original.jpg"
-            else :
-                image = data["attributes"]["posterImage"]["original"]
-            if data["attributes"]["coverImage"] is None:
-                cover_image = "https://media.kitsu.io/characters/images/8266/original.jpg"
-            else :
-                cover_image = data["attributes"]["coverImage"]["original"]
-            characters = data["relationships"]["characters"]["links"]["related"]
-            output.append({"title" : en_name, "synopsis": synopsis, "rating": average_rating, "date": start_date, "image": image, "cover": cover_image})
-    else: 
-        max = 0
-        print ("Dangerous!")
-    return (output, max) # use max to figure out pagination 
+        output.append({"name": en_name, "description": description, "image": image, "id": id})
+    return (output, max)

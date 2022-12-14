@@ -104,11 +104,12 @@ def match():
         loginstatus = True
         sessionusername = session['username']
         if request.method == 'POST': # process searching functionality for character in match.html
-            if 'max' in session:
-                session.pop('max', None) 
             if len(request.form['input']) > 0: # checks if the input is blank
                 return redirect(url_for("match_search", input = request.form['input'], media = request.form['media'], page = 0))
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = None)
+        if request.method == 'GET':
+            if 'id' in request.args:
+                return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
+    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def match_search(media, input, page):
@@ -117,9 +118,20 @@ def match_search(media, input, page):
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        diction = api.pagination(input, page, media)
+        diction = api.pagination_with_media(input, page, media)
         return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = media)
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None)
+    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
+
+@app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
+def match_search_show_character(id, page):
+    loginstatus = False
+    sessionusername = ''
+    if 'username' in session:
+        loginstatus = True
+        sessionusername = session['username']
+        diction = api.pagination_id(id, page)
+        return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = "Character")
+    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
 
 @app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def search_results(media, input, page):
