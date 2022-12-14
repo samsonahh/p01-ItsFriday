@@ -92,7 +92,7 @@ def profile():
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
 
-    return render_template("profile.html", login_status = True, session_username = session['username'])
+    return render_template("profile.html", session_username = session['username'])
 
 @app.route('/match', methods=['GET', 'POST'])
 def match():
@@ -107,7 +107,7 @@ def match():
         if 'id' in request.args:
             return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
 
-    return render_template("match.html", login_status = True, session_username = session['username'], diction = None, media = "None")
+    return render_template("match.html", session_username = session['username'], diction = None, media = "None")
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def match_search(media, input, page):
@@ -115,7 +115,7 @@ def match_search(media, input, page):
         return redirect(url_for('login'))
 
     diction = api.pagination_with_media(input, page, media)
-    return render_template("match.html", login_status = True, session_username = session['username'], diction = diction, media = media)
+    return render_template("match.html", session_username = session['username'], diction = diction, media = media)
 
 @app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
 def match_search_show_character(id, page):
@@ -123,7 +123,7 @@ def match_search_show_character(id, page):
         return redirect(url_for('login'))
 
     diction = api.pagination_id(id, page)
-    return render_template("match.html", login_status = True, session_username = session['username'], diction = diction, media = "Character")
+    return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
 
 @app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders for character searching 
 def search_results(media, input, page):
@@ -132,17 +132,17 @@ def search_results(media, input, page):
 
     if media == 'Character':
         diction = api.pagination(input, page)
-        return render_template("home.html", login_status = True, session_username = session['username'], diction = diction)
+        return render_template("home.html", session_username = session['username'], diction = diction)
     for i in diction:
         print (i)
-    return render_template("home.html", login_status = True, session_username = session['username'], diction = None)
+    return render_template("home.html", session_username = session['username'], diction = None)
 
 @app.route('/profiles/<media>/<input>', methods=['GET', 'POST']) #character profiles 
 def character_profile(media, input):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
 
-    return render_template("profile.html", login_status = True, session_username = session['username'])
+    return render_template("profile.html", session_username = session['username'])
 
 
 @app.route('/compatibility')
@@ -150,7 +150,7 @@ def compatibility():
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
 
-    return render_template("compatibility.html", login_status = True, session_username = session['username'])
+    return render_template("compatibility.html", session_username = session['username'])
 
 
 if __name__ == "__main__": #false if this file imported as module
