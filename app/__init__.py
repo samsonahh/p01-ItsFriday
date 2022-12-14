@@ -67,10 +67,10 @@ def register():
             return render_template("register.html", FAILMSG="Username already exists!")
 
         if not check_usernamerequirements(new_username): #checks if the username fulfills reqs 
-            return render_template("register.html", FAILMSG="Username is not long enough")
+            return render_template("register.html", FAILMSG="Username is not long enough!")
        
         if not check_passwordrequirements(new_password): #checks if the password fulfills reqs
-            return render_template("register.html", FAILMSG="Password is not long enough")
+            return render_template("register.html", FAILMSG="Password is not long enough!")
 
         if not new_password == new_password_confirm: #checks if the password matches the confirmation password
             return render_template("register.html", FAILMSG="Passwords don't match!")

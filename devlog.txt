@@ -61,7 +61,7 @@ danielH -- 2022-12-9 14:06
 Worked on register.html format 
 ==============================================================
 
-EricaL -- 2022-12-9 14:15
+ericaL -- 2022-12-9 14:15
 --------------------------------------------------------------
 Finished login function in db and main python file. 
 Finished register function in db and main python file. 
@@ -89,7 +89,7 @@ samsonW -- 2022-12-12 14:48
 Bug fixed login, register, db_functions. All should be working now.
 ==============================================================
 
-EricaL -- 2022-12-12 15:19
+ericaL -- 2022-12-12 15:19
 --------------------------------------------------------------
 Added new function in db_functions for history for future uses, 
 once match & profile is finalized. Added comments for register.
@@ -123,8 +123,16 @@ functions to allow users to search for anime shows, select
 anime, and recieve all characters from a specific anime.
 PROBLEM: the api is a bit outdated, informed up until 2016  
 
-EricaL -- 2022-12-14 1:31
+ericaL -- 2022-12-14 1:31
 --------------------------------------------------------------
 Edited wording in home.html (minor change)
 Started character_profile in Flask for profile.html
+==============================================================
+
+samsonW -- 2022-12-14 11:13
+--------------------------------------------------------------
+Fixed gitignore for keys
+Tab icon logo added
+Register and login failmsgs touched up
+Noticed that reigtser and login needs to allow scrolling in case card is not fully visible
 ==============================================================
