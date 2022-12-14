@@ -89,83 +89,68 @@ def logout():
 
 @app.route('/profile')
 def profile():
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-    return render_template("profile.html", login_status = loginstatus, session_username = sessionusername)
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    return render_template("profile.html", login_status = True, session_username = session['username'])
 
 @app.route('/match', methods=['GET', 'POST'])
 def match():
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-        if request.method == 'POST': # process searching functionality for character in match.html
-            if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    if request.method == 'POST': # process searching functionality for character in match.html
+        if len(request.form['input']) > 0: # checks if the input is blank
+            return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
         
-        if request.method == 'GET':
-            if 'id' in request.args:
-                return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
+    if request.method == 'GET':
+        if 'id' in request.args:
+            return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
+
+    return render_template("match.html", login_status = True, session_username = session['username'], diction = None, media = "None")
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def match_search(media, input, page):
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-        diction = api.pagination_with_media(input, page, media)
-        return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = media)
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    diction = api.pagination_with_media(input, page, media)
+    return render_template("match.html", login_status = True, session_username = session['username'], diction = diction, media = media)
 
 @app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
 def match_search_show_character(id, page):
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-        diction = api.pagination_id(id, page)
-        return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = "Character")
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = "None")
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    diction = api.pagination_id(id, page)
+    return render_template("match.html", login_status = True, session_username = session['username'], diction = diction, media = "Character")
 
 @app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders for character searching 
 def search_results(media, input, page):
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-        if media == 'Character':
-            diction = api.pagination(input, page)
-            return render_template("home.html", login_status = loginstatus, session_username = sessionusername, diction = diction)
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    if media == 'Character':
+        diction = api.pagination(input, page)
+        return render_template("home.html", login_status = True, session_username = session['username'], diction = diction)
     for i in diction:
         print (i)
-    return render_template("home.html", login_status = loginstatus, session_username = sessionusername, diction = None)
+    return render_template("home.html", login_status = True, session_username = session['username'], diction = None)
 
 @app.route('/profiles/<media>/<input>', methods=['GET', 'POST']) #character profiles 
 def character_profile(media, input):
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-    return render_template("profile.html", login_status = loginstatus, session_username = sessionusername)
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    return render_template("profile.html", login_status = True, session_username = session['username'])
 
 
 @app.route('/compatibility')
 def compatibility():
-    loginstatus = False
-    sessionusername = ''
-    if 'username' in session:
-        loginstatus = True
-        sessionusername = session['username']
-    return render_template("compatibility.html", login_status = loginstatus, session_username = sessionusername)
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    return render_template("compatibility.html", login_status = True, session_username = session['username'])
 
 
 if __name__ == "__main__": #false if this file imported as module
