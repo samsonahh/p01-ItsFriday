@@ -1,2 +1,4 @@
 TNPG: It's Friday!, Roster: Erica Li, Verit Li, Daniel He, Samson Wu
 SoftDev P01
+
+If you are getting errors with opening keys in the Flask app, please make sure that you are running the Flask app from the repo's root directory and not app/.
