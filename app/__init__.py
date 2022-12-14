@@ -30,7 +30,7 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        if request.method == 'POST':
+        #if request.method == 'POST':
             
     return render_template("home.html", login_status = loginstatus, session_username = sessionusername)
 
@@ -108,7 +108,7 @@ def match():
                 session.pop('max', None) 
             if len(request.form['input']) > 0: # checks if the input is blank
                 return redirect(url_for("match_search", input = request.form['input'], media = request.form['media'], page = 0))
-    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None)
+    return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None, media = None)
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def match_search(media, input, page):
@@ -117,14 +117,8 @@ def match_search(media, input, page):
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        print (input)
-        print (media)
-        if media == 'Character':
-            diction = api.pagination(input, page)
-            print("checkpoint 1")
-            return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction)
-    for i in diction:
-        print (i)
+        diction = api.pagination(input, page, media)
+        return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = diction, media = media)
     return render_template("match.html", login_status = loginstatus, session_username = sessionusername, diction = None)
 
 @app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 

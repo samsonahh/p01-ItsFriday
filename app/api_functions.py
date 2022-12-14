@@ -121,7 +121,6 @@ def pagination_with_media(input, page, media):
         for data in json["data"]: 
             en_name = data["attributes"]["names"]["en"]
             description = data["attributes"]["description"]
-            print (description)
             if data["attributes"]["image"] is None:
                 image = "https://media.kitsu.io/characters/images/8266/original.jpg"
             else :
@@ -131,6 +130,22 @@ def pagination_with_media(input, page, media):
         url = f"https://kitsu.io/api/edge/anime?page[limit]=10&page[offset]={page}"
         res = requests.get(url, params={"filter[text]": input})
         json = res.json()
+        max = json["meta"]['count']
+        for data in json["data"]:
+            en_name = data["attributes"]["titles"]["en"]
+            synopsis = data["attributes"]["synopsis"]
+            average_rating = data["attributes"]["averageRating"]
+            start_date = data["attributes"]["startDate"]
+            if data["attributes"]["posterImage"] is None:
+                image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+            else :
+                image = data["attributes"]["posterImage"]["original"]
+            if data["attributes"]["coverImage"] is None:
+                cover_image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+            else :
+                cover_image = data["attributes"]["coverImage"]["original"]
+            characters = data["relationships"]["characters"]["links"]["related"]
+            output.append({"title" : en_name, "synopsis": synopsis, "rating": average_rating, "date": start_date, "image": image, "cover": cover_image})
     else: 
         max = 0
         print ("Dangerous!")
