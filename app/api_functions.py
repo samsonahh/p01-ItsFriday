@@ -5,28 +5,29 @@
 import requests
 
 #get all the keys
-def apparatus_key_HuggingFace():
-    try:
-        with open('app/keys/key_HuggingFace.txt', 'r') as f:
-        KEY_HuggingFace = f.read()
-        return KEY_HuggingFace
-    except: 
-        return '0'
+# def apparatus_key_HuggingFace():
+#     try:
+#         with open('app/keys/key_HuggingFace.txt', 'r') as f:
+#             KEY_HuggingFace = f.read()
+#             return KEY_HuggingFace
+#     except: 
+#         return '0'
         
-def apparatus_key_LoveCalculator():
-    try:
-        with open('app/keys/key_LoveCalculator.txt', 'r') as f:
-        KEY_HuggingFace = f.read()
-        return KEY_HuggingFace
-    except: 
-        return '0'
+# def apparatus_key_LoveCalculator():
+#     try:
+#         with open('app/keys/key_LoveCalculator.txt', 'r') as f:
+#             KEY_LoveCalculator= f.read()
+#             return KEY_LoveCalculator
+#     except: 
+#         return '0'
     
-def apparatus_key_MyAnimeList():
-    try:
-        with open('app/keys/key_MyAnimeList.txt', 'r') as f:
-        return KEY_HuggingFace
-    except: 
-        return '0'
+# def apparatus_key_MyAnimeList():
+#     try:
+#         with open('app/keys/key_MyAnimeList.txt', 'r') as f:
+#             KEY_MyAnimeList= f.read()
+#             return KEY_MyAnimeList
+#     except: 
+#         return '0'
 
 with open('app/keys/key_HuggingFace.txt', 'r') as f:
     KEY_HuggingFace = f.read()
