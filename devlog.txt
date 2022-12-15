@@ -140,3 +140,9 @@ Noticed that reigtser and login needs to allow scrolling in case card is not ful
 danielH -- 2022-12-14 23:03
 --------------------------------------------------------------
 match.html css and touchups
+
+ericaL & veritL-- 2022-12-15 14:31
+--------------------------------------------------------------
+created serach_results.html
+create route for character_profile 
+==============================================================
