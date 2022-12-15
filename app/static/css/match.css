@@ -44,7 +44,7 @@ body {
   }
 
 .touch{
-    transition: transform 0.8s;
+    transition: transform 0.5s;
 }
 .touch:hover{
     transform: scale(1.1,1.1);

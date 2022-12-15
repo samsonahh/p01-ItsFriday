@@ -31,7 +31,8 @@ def home():
         loginstatus = True
         sessionusername = session['username']
         #if request.method == 'POST':
-            
+        session['match_one'] = {'image': 'false', id: 'false'}
+        session['match_two'] = {'image': 'false', id: 'false'}
     return render_template("home.html", login_status = loginstatus, session_username = sessionusername)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -104,6 +105,8 @@ def match():
             return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
         
     if request.method == 'GET':
+        # if 'select' in request.args:
+        #     if session['match_one']
         if 'id' in request.args:
             return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
 
@@ -113,7 +116,6 @@ def match():
 def match_search(media, input, page):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
-
     diction = api.pagination_with_media(input, page, media)
     return render_template("match.html", session_username = session['username'], diction = diction, media = media)
 
