@@ -30,6 +30,8 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
+        session['match_one'] = {'image': 'false', id: 'false'}
+        session['match_two'] = {'image': 'false', id: 'false'}
         if request.method == 'POST':
             print(request.form)
             if len(request.form['character_search']) > 0: # checks if the input is blank
@@ -106,6 +108,8 @@ def match():
             return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 0))
         
     if request.method == 'GET':
+        # if 'select' in request.args:
+        #     if session['match_one']
         if 'id' in request.args:
             return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
 
