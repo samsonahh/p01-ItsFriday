@@ -30,9 +30,8 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        session['match_one'] = {'image': 'false', id: 'false'}
-        session['match_two'] = {'image': 'false', id: 'false'}
-
+        session['match_one'] = {'image': 'false', 'id': 'false'}
+        session['match_two'] = {'image': 'false', 'id': 'false'}
         if request.method == 'POST':
             print(request.form)
             if len(request.form['character_search']) > 0: # checks if the input is blank
@@ -119,13 +118,9 @@ def match():
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
 def search_results(media, input, page):
     if not 'username' in session: #if someone tries to go here when not logged in
-        return redirect(url_for('login')
-    
-    if request.method == 'GET':
-        print(request.form)
-        character_name = request.form['input']
-        return redirect(url_for('character_profile'), input = character_name)
-    
+        return redirect(url_for('login'))
+    # character_name = request.form['input']
+    # return redirect(url_for('character_profile'), input = character_name)
     diction = api.pagination_with_media(input, page, media)
     return render_template("search_results.html", session_username = session['username'], diction = diction, media = media)
 
@@ -148,7 +143,7 @@ def match_test():
     diction = (diction, "12")
     return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
 
-@app.route('/profile/Character/<input>'), methods=['GET', 'POST']) #character profiles 
+@app.route('/profile/Character/<input>', methods=['GET', 'POST']) #character profiles 
 def character_profile(input):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
