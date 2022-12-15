@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- 
+TNPG: It's Friday!, Roster: Erica Li, Verit Li, Daniel He, Samson Wu
+SoftDev
+P01 
+-->
+<html>
+    <head>
+        <title>Anime Love Calculator: Match</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="../static/css/match.css") }}/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!--                          TITLE AT TOP                             -->
+        <div class="grid-x">
+            <div class="cell small-2 medium-2 large-2"></div>
+            <div class="cell small-8 medium-8 large-8"><a href="/"><img src={{ url_for('static', filename="../static/assets/logo3.png") }}></a></div>
+            <div class="cell small-2 medium-2 large-2"></div>
+        </div>
+        <!--                          TITLE AT TOP END                             -->
+
+        <!--                          NAVBAR                             -->
+            <div class="top-bar" style="background-color: rgb(252, 207, 238);">
+                <div class="top-bar-left">
+                    <ul class="menu horizontal" style="background-color: rgb(252, 207, 238);">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/profile">Character Information</a></li>
+                        <li><a href="/match">Match</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu horizontal" style="background-color: rgb(252, 207, 238);">
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <!--                          NAVBAR END                                        -->
+        <br>
+        <div>
+            <form method = "POST" action="/match">
+                <div class="grid-x grid-padding-x">
+                    <div class="cell small-1 medium-1 large-1" style="width: 140px;">
+                        <label for="media" style="white-space: nowrap;">Search for:</label>
+                        <select name="media" id="media">
+                            <option value="Character">Character</option>
+                            <option value="Show">Show</option>
+                        </select>                                                  
+                    </div>
+                    <div class="cell small-3 medium-3 large-3">
+                        <label for="input">Query:</label>
+                        <div class="input-group">
+                            <input class="input-group-field" type="text" name="input" placeholder="Search" id="input" style="width:400px;">
+                            <div class="input-group-button">
+                              <input type="submit" class="button" value="Submit" name="sub1">
+                            </div>
+                          </div>
+                    </div>
+                    <div class="cell small-2 medium-2 large-2">
+                    </div>
+                    <div class="cell small-6 medium-6 large-6"></div>
+                </div> 
+            </form>
+        </div>
+        <br>
+        <div class="grid-x grid-padding-x" id="foo">
+            <div class="cell small-9 medium-9 large-9">
+                <div class="grid-x grid-margin-x grid-padding-x">
+                    {% if media != 'None' %}
+                        {% if media == 'Character' %}
+                            {% for i in diction[0] %}
+                                <div class="cell small-12 medium-12 large-6" style="border: none; outline: none;">
+                                    <!-- <div class="card" style="width:fit-content;">
+                                        <form method="GET">
+                                            <button type="submit" name="id" value="{{i['id']}}" style="width: fit-content;">
+                                                <img src="{{i['image']}}" style="width: 250px; height: auto;">
+                                            </button>
+                                        </form>
+                                        <div class="card-section">
+                                            <h4>{{ i['name'] }}</h4>
+                                        </div>
+                                    </div>   -->
+                                    <div class="media-object" style="border: none; outline: none;">
+                                        <div class="media-object-section" style="border: none; outline: none;">
+                                            <div class="thumbnail" style="border: none; outline: none;">
+                                                <form method="GET">
+                                                    <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
+                                                        <img src="{{i['image']}}" style="width: 200px; height: auto;" class="touch">
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="media-object-section">
+                                            <h4 class="title">{{ i['name'] }}</h4>
+                                            <hr>
+                                            <div class = 'paper'>
+                                                <p class="fade">{{ i['description'] }}</p>
+                                                <form method = "POST">
+                                                <button class="button" value = "{{ i['name'] }}"> Profile? </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            {% endfor %}
+                        {% elif media == 'Show' %}
+                            {% for i in diction[0] %}
+                                <div class="cell small-6 medium-4 large-3">
+                                    <div class="card">
+                                        <form method="GET" action="/match">
+                                            <input type="hidden" name = "media" value="Show/Characters">
+                                            <button type="submit" name="id" value="{{i['id']}}" style="width: fit-content;">
+                                                <img src="{{i['image']}}" style="max-width: 300px;height: auto;">
+                                            </button>
+                                        </form>
+                                        <div class="card-section">
+                                            <h4>{{ i['title'] }}</h4>
+                                        </div>
+                                    </div>  
+                                </div> 
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="cell small-3 medium-3 large-3" data-sticky-container>
+                <div class="sticky" data-sticky data-anchor="foo">
+                    <div class="grid-x">
+                        <div class="cell small-2 medium-2 large-2">
+
+                        </div>
+                        <div class="cell small-8 medium-8 large-8">
+                            <h4 class="subheader" style="white-space: nowrap;">Select your match</h4>
+                            <div class = 'blank'>
+                                +
+                            </div>
+                            <br>
+                            <div class = 'blank'>
+                                +
+                            </div>
+                        </div>
+                        <div class="cell small-2 medium-2 large-2">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).foundation();
+            </script>
+        </div>
+    </body>
+</html>
