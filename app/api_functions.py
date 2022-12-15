@@ -56,7 +56,7 @@ def get_random_quote(character):
     # return res.json()
 
 #uses AnimeChan API to get a random character and their quotes and their information from Kitsu API
-def get_random_profile():
+def get_random_profile(): # OUTDATED 
     #First get a random character with eligible quotes
     AnimeChan_url = 'https://animechan.vercel.app/api/random'
     res = requests.get(AnimeChan_url) 
@@ -125,8 +125,11 @@ def pagination(input, page):
         # else: 
         #     jp_name = data["attributes"]["names"]["ja_jp"]
         description = data["attributes"]["description"]
+        print(description)
+        if len(description) == 0 or description == '\nNo biography written.\n\n':
+            continue
         if data["attributes"]["image"] is None:
-            image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+            continue
         else :
             image = data["attributes"]["image"]["original"]
         output.append({"name": en_name, "description": description, "image": image, "id": id})

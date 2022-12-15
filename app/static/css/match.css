@@ -1,0 +1,51 @@
+body {
+    /* background-color: black;
+    color: aliceblue; */
+}
+
+.title {
+    /* text-align: center;
+    background-image: linear-gradient(to right, rgb(79, 152, 128) 60%, rgba(255,0,0,0) 99%);
+    margin-top: 10px;
+    margin-left: -40px; */
+}
+
+/* from https://css-tricks.com/line-clampin/ */
+.paper{
+    background-color: rgb(250, 239, 224);
+    padding: 10px 10px;
+    border-radius: 15px;
+}
+.fade {
+    line-height: 1.6em;
+    position: relative;
+    height: 12.8em; /* exactly three lines */
+    overflow: hidden;
+  }
+  .fade::after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 1.6em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(250, 239, 224) 50%);
+  }
+
+  .blank{
+    color: rgb(232, 230, 230);
+    width: 205px;
+    height: 300px;
+    border: dashed 3px rgb(166, 165, 165);
+    text-align: center;
+    padding: 120px 0;
+    font-size: 40px;
+  }
+
+.touch{
+    transition: transform 0.8s;
+}
+.touch:hover{
+    transform: scale(1.1,1.1);
+}

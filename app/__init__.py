@@ -125,6 +125,17 @@ def match_search_show_character(id, page):
     diction = api.pagination_id(id, page)
     return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
 
+@app.route('/match/test')
+def match_test():
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+
+    diction = []
+    for i in range(12):
+        diction.append({"name": 'girl', "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fermentum tellus vitae quam ornare, vel mattis lacus lobortis. Pellentesque gravida hendrerit congue. Curabitur nisi erat, tincidunt ut commodo ac, imperdiet ac libero. In at diam vitae turpis maximus dapibus. Ut non nulla sit amet odio volutpat egestas. Ut pharetra odio nulla. Nulla non eleifend risus. Vestibulum non elit quam. Duis vel dolor nunc. Quisque euismod semper lorem in lacinia.', "image": "https://media.kitsu.io/characters/images/8266/original.jpg", "id": i})
+    diction = (diction, "12")
+    return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
+
 @app.route('/<media>/<input>/<page>', methods=['GET', 'POST']) # renders for character searching 
 def search_results(media, input, page):
     if not 'username' in session: #if someone tries to go here when not logged in
