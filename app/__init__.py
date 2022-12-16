@@ -27,6 +27,10 @@ app.secret_key = b'kJu2hlllSnasd8a0a@(@2lask'
 def home():
     loginstatus = False
     sessionusername = ''
+
+    if not 'username' in session and request.method == 'POST': # if you make a search result when not logged in
+        return redirect(url_for("login"))
+
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
