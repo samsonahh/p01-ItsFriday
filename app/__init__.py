@@ -95,6 +95,22 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home'))
 
+@app.route('/search/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
+def search_results(media, input, page):
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+    # character_name = request.form['input']
+    # return redirect(url_for('character_profile'), input = character_name)
+    if request.method == 'POST':
+        if 'input' in request.form: #if user is searching for a new character
+            if len(request.form['input']) > 0: # checks if the input is blank
+                return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 0))
+        if 'character' in request.form: #if user is accessing a character profile
+            #redirect to url of that character's profile
+
+    diction = api.pagination_with_media(input, page, media)
+    return render_template("search_results.html", session_username = session['username'], diction = diction, media = media)
+
 @app.route('/profile')
 def profile():
     if not 'username' in session: #if someone tries to go here when not logged in
@@ -109,7 +125,7 @@ def match():
 
     if request.method == 'POST': # process searching functionality for character in match.html
         if len(request.form['input']) > 0: # checks if the input is blank
-            return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 0))
+            return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
         
     if request.method == 'GET':
         # if 'select' in request.args:
@@ -120,13 +136,13 @@ def match():
     return render_template("match.html", session_username = session['username'], diction = None, media = "None")
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
-def search_results(media, input, page):
+def match_search(media, input, page):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
     # character_name = request.form['input']
     # return redirect(url_for('character_profile'), input = character_name)
     diction = api.pagination_with_media(input, page, media)
-    return render_template("search_results.html", session_username = session['username'], diction = diction, media = media)
+    return render_template("match.html", session_username = session['username'], diction = diction, media = media)
 
 @app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
 def match_search_show_character(id, page):
