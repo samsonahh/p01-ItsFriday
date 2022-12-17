@@ -146,3 +146,7 @@ ericaL & veritL-- 2022-12-15 14:31
 created serach_results.html
 create route for character_profile 
 ==============================================================
+
+veritL -- 2022-12-16 14:05
+Created a search route to help differentiate between match search and profile search.
+Started the code to deal with what happens when a user submits a form in search_results.html.
