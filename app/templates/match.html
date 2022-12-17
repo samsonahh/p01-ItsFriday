@@ -175,30 +175,44 @@ P01
             </script>
         </div>
         {% if diction is not none %}
-            {% for i in pagination['previous']%}
-                {{ i }}
-            {% endfor %}
-            {% for i in pagination['future']%}
-                {{ i }}
-            {% endfor %}
             <nav aria-label="Pagination">
-                <ul class="pagination">
-                {% if diction[1] == 0 %}
+                <ul class="pagination text-center">
+                {% if pagination['page'] == 1 %}
                     <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
-                {% elif diction[1] > 0 %}
-                    <li class="pagination-previous"><a href="#" aria-label="Next page">Previous <span class="show-for-sr">page</span></a></li>
+                {% elif pagination['page'] > 0 %}
+                    <li class="pagination-previous"><a href="{{ request.path[0:request.path.rfind('/') + 1] + (pagination['page'] - 1)|string }}" aria-label="Previous page">Previous <span class="show-for-sr">page</span></a></li>
                 {% endif %}
+
+                {% if pagination['previous_ellipsis'] %}
+                    <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + '1' }}" aria-label="Page 1">1</a></li>
+                    <li class="ellipsis" aria-hidden="true"></li>
+                {% endif %}
+
                 {% for i in pagination['previous']%}
-                    <li><a href="#" aria-label="Page 2">2</a></li>
+                    <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + (i)|string }}" aria-label="Page {{ i }}">{{ i }}</a></li>
                 {% endfor %}
-                <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
-                <li><a href="#" aria-label="Page 2">2</a></li>
+
+                    <li class="current"><span class="show-for-sr">You're on page</span>{{ pagination['page'] }}</li>
+
+                {% for i in pagination['future']%}
+                    <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + (i)|string }}" aria-label="Page {{ i }}">{{ i }}</a></li>
+                {% endfor %}
+
+                {% if pagination['future_ellipsis'] %}
+                    <li class="ellipsis" aria-hidden="true"></li>
+                    <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + diction[1]|string }}" aria-label="Page {{ diction[1] }}">{{ diction[1] }}</a></li>
+                {% endif %}
+                <!-- <li><a href="#" aria-label="Page 2">2</a></li>
                 <li><a href="#" aria-label="Page 3">3</a></li>
                 <li><a href="#" aria-label="Page 4">4</a></li>
                 <li class="ellipsis" aria-hidden="true"></li>
                 <li><a href="#" aria-label="Page 12">12</a></li>
-                <li><a href="#" aria-label="Page 13">13</a></li>
-                <li class="pagination-next"><a href="#" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+                <li><a href="#" aria-label="Page 13">13</a></li> -->
+                {% if pagination['page'] == diction[1] %}
+                    <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
+                {% elif diction[1] > pagination['page'] %}
+                    <li class="pagination-next"><a href="{{ request.path[0:request.path.rfind('/') + 1] + (pagination['page'] + 1)|string }}" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+                {% endif %}
                 </ul>
             </nav>
         {% endif %}

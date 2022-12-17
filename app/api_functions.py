@@ -101,21 +101,26 @@ def query_character(input): #OUTDATED
     return output 
 
 def helper_page_format(page): # page is given as a string, convert into int. Page used as the value of offset attribute in Kitsu API calls 
-    page = int(page)
+    page = int(page) - 1
     if page < 0:
         page = 0
+    print('AAAAAA')
+    print(page * 12)
+    print('AAAAAA')
     return page * 12 # the page "offset" needs to be 12 because each page displays 12 items 
 
 def pagination(input, page):
     print("Keep in mind the API limit!")
     page = helper_page_format(page)
-    # print (page)
+    print (page)
     # print(123//10 + 1)
     url =  f"https://kitsu.io/api/edge/characters?page[limit]=12&page[offset]={page}"
     res = requests.get(url, params={"filter[name]": input})
     json = res.json()
     output = []
     max = (int(json["meta"]['count']) // 12) + 1
+    if max == 0:
+        max = 1
     for data in json["data"]: 
         id = data["id"]
         en_name = data["attributes"]["names"]["en"]
@@ -137,15 +142,17 @@ def pagination(input, page):
 
 def pagination_with_media(input, page, media):
     print("Keep in mind the API limit!")
-    page = helper_page_format(page)
     output = []
     if media == 'Character':
         return pagination(input, page)
     elif media == 'Show':
+        page = helper_page_format(page)
         url = f"https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]={page}"
         res = requests.get(url, params={"filter[text]": input})
         json = res.json()
         max = (int(json["meta"]['count']) // 12) + 1
+        if max == 0:
+            max = 1
         for data in json["data"]:
             id = data['id']
             en_name = data["attributes"]["canonicalTitle"]
@@ -172,7 +179,9 @@ def pagination_id(id, page):
     url = f"https://kitsu.io/api/edge/anime/{id}/anime-characters?page[limit]=12&page[offset]={page}"
     res = requests.get(url)
     json = res.json()
-    max = (int(json["meta"]['count']) // 12) + 1 
+    max = (int(json["meta"]['count']) // 12) + 1
+    if max == 0:
+        max = 1
     output = []
     for data in json["data"]:
         character_url = data["relationships"]["character"]["links"]["related"]

@@ -105,7 +105,7 @@ def search_results(media, input, page):
     if request.method == 'POST':
         if 'input' in request.form: #if user is searching for a new character
             if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 0))
+                return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 1))
         # if 'character' in request.form: #if user is accessing a character profile
             #redirect to url of that character's profile
 
@@ -127,7 +127,7 @@ def match():
     if request.method == 'POST': # process searching functionality for character in match.html
         if 'input' in request.form:
             if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
+                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 1))
         elif 'match_one' in request.form:
             session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
             session.modified = True
@@ -139,7 +139,7 @@ def match():
     if request.method == 'GET':
         if 'media' in request.args:
             if request.args['media'] == 'Show':
-                return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
+                return redirect(url_for("match_search_show_character", id = request.args['id'], page = 1))
             else:
                 if session['match_one']['image'] == 'false':
                     session['match_one'] = {'image': request.args['image'], 'id': request.args['id'], 'name': request.args['name']}
@@ -158,13 +158,17 @@ def match_search(media, input, page):
     # character_name = request.form['input']
     # return redirect(url_for('character_profile'), input = character_name)
     diction = api.pagination_with_media(input, page, media)
-    page = int(page) + 1
+    print(request.path)
+    print("PPPPPPPPPP")
+    page = int(page)
+    if page > diction[1]:
+        page = diction[1] # ISSUE: STILL ALLOWS URL TO GO BEYOND MAX
     previous_ellipsis = True
     future_ellipsis = True
     previous = []
     future = []
     for i in range(2):
-        if page - (2 - i) <= 0:
+        if page - (2 - i) < 1:
             previous_ellipsis = False
             pass
         else: 
@@ -175,14 +179,16 @@ def match_search(media, input, page):
         else:
             future.append(page + (i+1))
     pagination = {'previous_ellipsis': previous_ellipsis, 'future_ellipsis': future_ellipsis, 'previous': previous, 'future': future, 'page': page}
-    return render_template("match.html", session_username = session['username'], diction = diction, media = media, pagination = pagination)
+    return render_template("match.html", session_username = session['username'], diction = diction, media = media, pagination = pagination, input = input)
 
 @app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
 def match_search_show_character(id, page):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
     diction = api.pagination_id(id, page)
-    page = int(page) + 1
+    page = int(page)
+    if page > diction[1]:
+        page = diction[1]
     previous_ellipsis = True
     future_ellipsis = True
     previous = []
