@@ -158,8 +158,6 @@ def match_search(media, input, page):
     # character_name = request.form['input']
     # return redirect(url_for('character_profile'), input = character_name)
     diction = api.pagination_with_media(input, page, media)
-    print(request.path)
-    print("PPPPPPPPPP")
     page = int(page)
     if page > diction[1]:
         page = diction[1] # ISSUE: STILL ALLOWS URL TO GO BEYOND MAX
@@ -168,12 +166,18 @@ def match_search(media, input, page):
     previous = []
     future = []
     for i in range(2):
-        if page - (2 - i) < 1:
+        if page - (2 - i) == 1:
+            previous.append(page - (2 - i))
+            previous_ellipsis = False
+        elif page - (2 - i) < 1:
             previous_ellipsis = False
             pass
         else: 
             previous.append(page - (2 - i))
-        if page + (i+1) > diction[1]:
+        if page + (i + 1) == diction[1]:
+            future.append(page + (i+1))
+            future_ellipsis = False
+        elif page + (i + 1) > diction[1]:
             future_ellipsis = False
             pass
         else:
@@ -194,12 +198,18 @@ def match_search_show_character(id, page):
     previous = []
     future = []
     for i in range(2):
-        if page - (2 - i) <= 0:
+        if page - (2 - i) == 1:
+            previous.append(page - (2 - i))
+            previous_ellipsis = False
+        elif page - (2 - i) < 1:
             previous_ellipsis = False
             pass
         else: 
             previous.append(page - (2 - i))
-        if page + (i+1) > diction[1]:
+        if page + (i + 1) == diction[1]:
+            future.append(page + (i+1))
+            future_ellipsis = False
+        elif page + (i + 1) > diction[1]:
             future_ellipsis = False
             pass
         else:
