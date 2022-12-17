@@ -79,7 +79,7 @@ def get_random_profile(): # OUTDATED
         quotes.append(data['quote'])
     return {"name": en_name, "description": description, "image": image, "quotes": quotes}
 
-def query_character(input):
+def query_character(input): #OUTDATED
     print("Keep in mind the API limit!")
     url =  "https://kitsu.io/api/edge/characters?"
     res = requests.get(url, params={"filter[name]": input})
@@ -115,7 +115,7 @@ def pagination(input, page):
     res = requests.get(url, params={"filter[name]": input})
     json = res.json()
     output = []
-    max = json["meta"]['count']
+    max = (int(json["meta"]['count']) // 12) + 1
     for data in json["data"]: 
         id = data["id"]
         en_name = data["attributes"]["names"]["en"]
@@ -125,7 +125,7 @@ def pagination(input, page):
         # else: 
         #     jp_name = data["attributes"]["names"]["ja_jp"]
         description = data["attributes"]["description"]
-        print(description)
+        #print(description)
         if len(description) == 0 or description == '\nNo biography written.\n\n':
             continue
         if data["attributes"]["image"] is None:
@@ -145,7 +145,7 @@ def pagination_with_media(input, page, media):
         url = f"https://kitsu.io/api/edge/anime?page[limit]=12&page[offset]={page}"
         res = requests.get(url, params={"filter[text]": input})
         json = res.json()
-        max = json["meta"]['count']
+        max = (int(json["meta"]['count']) // 12) + 1
         for data in json["data"]:
             id = data['id']
             en_name = data["attributes"]["canonicalTitle"]
@@ -172,7 +172,7 @@ def pagination_id(id, page):
     url = f"https://kitsu.io/api/edge/anime/{id}/anime-characters?page[limit]=12&page[offset]={page}"
     res = requests.get(url)
     json = res.json()
-    max = json["meta"]['count']
+    max = (int(json["meta"]['count']) // 12) + 1 
     output = []
     for data in json["data"]:
         character_url = data["relationships"]["character"]["links"]["related"]
@@ -187,7 +187,7 @@ def pagination_id(id, page):
         # else: 
         #     jp_name = data["attributes"]["names"]["ja_jp"]
         description = data["attributes"]["description"]
-        print (description)
+        #print (description)
         if data["attributes"]["image"] is None:
             image = "https://media.kitsu.io/characters/images/8266/original.jpg"
         else :

@@ -22,25 +22,25 @@ body {
     height: 12.8em; /* exactly three lines */
     overflow: hidden;
   }
-  .fade::after {
-    content: "";
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 70%;
-    height: 1.6em;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(250, 239, 224) 50%);
-  }
+.fade::after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.6em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(250, 239, 224) 50%);
+}
 
-  .blank{
-    color: rgb(232, 230, 230);
-    width: 205px;
-    height: 300px;
-    border: dashed 3px rgb(166, 165, 165);
-    text-align: center;
-    padding: 120px 0;
-    font-size: 40px;
+.blank{
+  color: rgb(232, 230, 230);
+  width: 205px;
+  height: 300px;  
+  border: dashed 3px rgb(166, 165, 165);
+  text-align: center;
+  padding: 120px 0;
+  font-size: 40px;
   }
 
 .touch{
@@ -48,4 +48,17 @@ body {
 }
 .touch:hover{
     transform: scale(1.1,1.1);
+}
+
+.image{
+  max-width: 205px;
+  max-height: 300px;
+  transition: transform 0.5s;
+}
+
+.image:hover{
+  transform: scale(0.9,0.9);
+}
+.cella{
+  text-align: center;
 }

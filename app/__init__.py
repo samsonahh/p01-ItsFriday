@@ -34,8 +34,9 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        session['match_one'] = {'image': 'false', 'id': 'false'}
-        session['match_two'] = {'image': 'false', 'id': 'false'}
+        print('CCCCCCCCCCC')
+        session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+        session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         if request.method == 'POST':
             print(request.form)
             if len(request.form['character_search']) > 0: # checks if the input is blank
@@ -105,7 +106,7 @@ def search_results(media, input, page):
         if 'input' in request.form: #if user is searching for a new character
             if len(request.form['input']) > 0: # checks if the input is blank
                 return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 0))
-        if 'character' in request.form: #if user is accessing a character profile
+        # if 'character' in request.form: #if user is accessing a character profile
             #redirect to url of that character's profile
 
     diction = api.pagination_with_media(input, page, media)
@@ -124,15 +125,30 @@ def match():
         return redirect(url_for('login'))
 
     if request.method == 'POST': # process searching functionality for character in match.html
-        if len(request.form['input']) > 0: # checks if the input is blank
-            return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
-        
+        if 'input' in request.form:
+            if len(request.form['input']) > 0: # checks if the input is blank
+                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 0))
+        elif 'match_one' in request.form:
+            session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+            session.modified = True
+            return redirect(request.referrer)
+        elif 'match_two' in request.form:
+            session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+            session.modified = True
+            return redirect(request.referrer)
     if request.method == 'GET':
-        # if 'select' in request.args:
-        #     if session['match_one']
-        if 'id' in request.args:
-            return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
-
+        if 'media' in request.args:
+            if request.args['media'] == 'Show':
+                return redirect(url_for("match_search_show_character", id = request.args['id'], page = 0))
+            else:
+                if session['match_one']['image'] == 'false':
+                    session['match_one'] = {'image': request.args['image'], 'id': request.args['id'], 'name': request.args['name']}
+                    session.modified = True
+                    return redirect(request.referrer) # returns to url the request was made from (so you still see the search results)
+                elif session['match_two']['image'] == 'false':
+                    session['match_two'] = {'image': request.args['image'], 'id': request.args['id'], 'name': request.args['name']}
+                    session.modified = True
+                    return redirect(request.referrer) # returns to url the request was made from (so you still see the search results)
     return render_template("match.html", session_username = session['username'], diction = None, media = "None")
 
 @app.route('/match/<media>/<input>/<page>', methods=['GET', 'POST']) # renders unique match pages for character searching 
@@ -142,15 +158,48 @@ def match_search(media, input, page):
     # character_name = request.form['input']
     # return redirect(url_for('character_profile'), input = character_name)
     diction = api.pagination_with_media(input, page, media)
-    return render_template("match.html", session_username = session['username'], diction = diction, media = media)
+    page = int(page) + 1
+    previous_ellipsis = True
+    future_ellipsis = True
+    previous = []
+    future = []
+    for i in range(2):
+        if page - (2 - i) <= 0:
+            previous_ellipsis = False
+            pass
+        else: 
+            previous.append(page - (2 - i))
+        if page + (i+1) > diction[1]:
+            future_ellipsis = False
+            pass
+        else:
+            future.append(page + (i+1))
+    pagination = {'previous_ellipsis': previous_ellipsis, 'future_ellipsis': future_ellipsis, 'previous': previous, 'future': future, 'page': page}
+    return render_template("match.html", session_username = session['username'], diction = diction, media = media, pagination = pagination)
 
 @app.route('/match/<id>/<page>', methods=['GET', 'POST']) # display characters from a specific show
 def match_search_show_character(id, page):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
-
     diction = api.pagination_id(id, page)
-    return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
+    page = int(page) + 1
+    previous_ellipsis = True
+    future_ellipsis = True
+    previous = []
+    future = []
+    for i in range(2):
+        if page - (2 - i) <= 0:
+            previous_ellipsis = False
+            pass
+        else: 
+            previous.append(page - (2 - i))
+        if page + (i+1) > diction[1]:
+            future_ellipsis = False
+            pass
+        else:
+            future.append(page + (i+1))
+    pagination = {'previous_ellipsis': previous_ellipsis, 'future_ellipsis': future_ellipsis, 'previous': previous, 'future': future, 'page': page}
+    return render_template("match.html", session_username = session['username'], diction = diction, media = "Character", pagination = pagination)
 
 @app.route('/match/test')
 def match_test():

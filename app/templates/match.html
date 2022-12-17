@@ -73,21 +73,14 @@ P01
                         {% if media == 'Character' %}
                             {% for i in diction[0] %}
                                 <div class="cell small-12 medium-12 large-6" style="border: none; outline: none;">
-                                    <!-- <div class="card" style="width:fit-content;">
-                                        <form method="GET">
-                                            <button type="submit" name="id" value="{{i['id']}}" style="width: fit-content;">
-                                                <img src="{{i['image']}}" style="width: 250px; height: auto;">
-                                            </button>
-                                        </form>
-                                        <div class="card-section">
-                                            <h4>{{ i['name'] }}</h4>
-                                        </div>
-                                    </div>   -->
                                     <div class="media-object" style="border: none; outline: none;">
                                         <div class="media-object-section" style="border: none; outline: none;">
                                             <div class="thumbnail" style="border: none; outline: none;">
-                                                <form method="GET">
-                                                    <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
+                                                <form method="GET" action="/match">
+                                                    <input type="hidden" name = "name" value="{{i['name']}}">
+                                                    <input type="hidden" name = "id" value="{{i['id']}}">
+                                                    <input type="hidden" name = "image" value="{{i['image']}}">
+                                                    <button type="submit" name="media" value="Character" style="border: none; outline: none;">
                                                         <img src="{{i['image']}}" style="width: 200px; height: auto;" class="touch">
                                                     </button>
                                                 </form>
@@ -109,9 +102,8 @@ P01
                                 <div class="cell small-6 medium-4 large-3">
                                     <div class="card">
                                         <form method="GET" action="/match">
-                                            <input type="hidden" name = "select" value="Selection">
-                                            <input type="hidden" name = "image" value="{{i['image']}}">
-                                            <button type="submit" name="id" value="{{i['id']}}" style="width: fit-content;">
+                                            <input type="hidden" name="id" value="{{i['id']}}">
+                                            <button type="submit" name="media" value="Show" style="width: fit-content;">
                                                 <img src="{{i['image']}}" style="max-width: 300px;height: auto;">
                                             </button>
                                         </form>
@@ -134,17 +126,41 @@ P01
                         <div class="cell small-8 medium-8 large-8">
                             <div class = "grid-y" style="height:100vh">
                                 <div class="cell small-1 medium-1 large-1">
-                                    <h4 class="subheader" style="white-space: nowrap;">Select your match</h4>
+                                    {% if session['match_one']['image'] != 'false' and session['match_two']['image'] != 'false' %}
+                                    <form method = 'POST' action = '/compatibility'>
+                                        <button class="button expanded success" type="submit" name="match" value="True" style="color: aliceblue;">
+                                            Match!
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                        <h4 class="subheader" style="white-space: nowrap;">Select your match</h4>
+                                    {% endif %}
                                 </div>
-                                <div class="cell auto">
-                                    <div class = 'blank'>
-                                        +
-                                    </div>
+                                <div class="cell auto cella">
+                                    {% if session['match_one']['image'] != 'false' %}
+                                        <form method="POST" action="/match">
+                                            <button type="submit" name="match_one" value="deselect">
+                                                <img src="{{ session['match_one']['image'] }}" class="image">
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <div class = 'blank'>
+                                            +
+                                        </div>
+                                    {% endif %}
                                 </div>
-                                <div class="cell auto">
-                                    <div class = 'blank'>
-                                        +
-                                    </div>
+                                <div class="cell auto cella">
+                                    {% if session['match_two']['image'] != 'false' %}
+                                        <form method="POST" action="/match">
+                                            <button type="submit" name="match_two" value="deselect">
+                                                <img src="{{ session['match_two']['image'] }}" class="image">
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <div class = 'blank'>
+                                            +
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -158,5 +174,33 @@ P01
                 $(document).foundation();
             </script>
         </div>
+        {% if diction is not none %}
+            {% for i in pagination['previous']%}
+                {{ i }}
+            {% endfor %}
+            {% for i in pagination['future']%}
+                {{ i }}
+            {% endfor %}
+            <nav aria-label="Pagination">
+                <ul class="pagination">
+                {% if diction[1] == 0 %}
+                    <li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
+                {% elif diction[1] > 0 %}
+                    <li class="pagination-previous"><a href="#" aria-label="Next page">Previous <span class="show-for-sr">page</span></a></li>
+                {% endif %}
+                {% for i in pagination['previous']%}
+                    <li><a href="#" aria-label="Page 2">2</a></li>
+                {% endfor %}
+                <li class="current"><span class="show-for-sr">You're on page</span> 1</li>
+                <li><a href="#" aria-label="Page 2">2</a></li>
+                <li><a href="#" aria-label="Page 3">3</a></li>
+                <li><a href="#" aria-label="Page 4">4</a></li>
+                <li class="ellipsis" aria-hidden="true"></li>
+                <li><a href="#" aria-label="Page 12">12</a></li>
+                <li><a href="#" aria-label="Page 13">13</a></li>
+                <li class="pagination-next"><a href="#" aria-label="Next page">Next <span class="show-for-sr">page</span></a></li>
+                </ul>
+            </nav>
+        {% endif %}
     </body>
 </html>
