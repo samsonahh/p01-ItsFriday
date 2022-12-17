@@ -140,6 +140,7 @@ Noticed that reigtser and login needs to allow scrolling in case card is not ful
 danielH -- 2022-12-14 23:03
 --------------------------------------------------------------
 match.html css and touchups
+==============================================================
 
 ericaL & veritL-- 2022-12-15 14:31
 --------------------------------------------------------------
@@ -153,3 +154,10 @@ Created a search route to help differentiate between match search and profile se
 Started the code to deal with what happens when a user submits a form in search_results.html.
 ==============================================================
 
+danielH -- 2022-12-17 3:25
+--------------------------------------------------------------
+Implemented features: allow users to select two characters and
+display them on the page, deselect characters, on match.html.
+Added foundation pagination and jinja to modify pagianation bar 
+based on current page
+==============================================================
