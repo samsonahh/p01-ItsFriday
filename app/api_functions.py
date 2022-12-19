@@ -203,3 +203,25 @@ def pagination_id(id, page):
             image = data["attributes"]["image"]["original"]
         output.append({"name": en_name, "description": description, "image": image, "id": id})
     return (output, max)
+
+#Takes in two characters and returns a compatibility percentage (integer out of 100) based on the LoveCalculator API
+def LoveCalculator_calculate(character0, character1):
+    
+    url = "https://love-calculator.p.rapidapi.com/getPercentage"
+
+    querystring = {"sname":character0,"fname":character1}
+
+    headers = {
+        "X-RapidAPI-Key": KEY_LoveCalculator,
+        "X-RapidAPI-Host": "love-calculator.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    json = response.json()
+    compatibility = json["percentage"] #NOTE: this returns a string of an integer number 0-100
+    compatibility = int(compatibility)
+    
+    return compatibility
+#LoveCalculator_calculate() tests:
+#print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
+#print(type(LoveCalculator_calculate("John", "Alice")))

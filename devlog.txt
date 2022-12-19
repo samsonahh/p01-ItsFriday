@@ -161,3 +161,9 @@ display them on the page, deselect characters, on match.html.
 Added foundation pagination and jinja to modify pagianation bar 
 based on current page
 ==============================================================
+
+veritL -- 2022-12-18 19:18
+--------------------------------------------------------------
+Added LoveCalculator_calculate(character0, character1) function to api_functions.py
+It takes in two characters and returns a compatibility percentage (integer out of 100) based on the LoveCalculator API
+==============================================================
