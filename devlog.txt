@@ -173,4 +173,5 @@ samsonW -- 2022-12-19 8:19
 stripped all user input
 added tab icon to pages (doesn't work for pages with args)
 changed profile.html and compatibility.html to fit newer site styling
+Profile? button reroutes to profile page with its id
 ==============================================================

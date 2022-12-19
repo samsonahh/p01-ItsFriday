@@ -192,6 +192,7 @@ def match_search(media, input, page):
 def match_search_show_character(id, page):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
+        
     diction = api.pagination_id(id, page)
     page = int(page)
     if page > diction[1]:
@@ -231,13 +232,12 @@ def match_test():
     diction = (diction, "12")
     return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
 
-@app.route('/profile/Character/<input>', methods=['GET', 'POST']) #character profiles 
-def character_profile(input):
+@app.route('/profile/Character/<id>', methods=['GET', 'POST']) #character profiles 
+def character_profile(id):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
 
-
-    return render_template("profile.html", session_username = session['username'])
+    return render_template("profile.html", session_username = session['username'], display_id = id)
 
 
 @app.route('/compatibility')

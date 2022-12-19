@@ -91,7 +91,7 @@ P01
                                             <hr>
                                             <div class = 'paper'>
                                                 <p class="fade">{{ i['description'] }}</p>
-                                                <button class="button">Profile?</button>
+                                                <a href={{ url_for('character_profile', id=i['id']) }} class="button">Profile?</a>
                                             </div>
                                         </div>
                                     </div>
