@@ -32,6 +32,7 @@ P01
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu horizontal" style="background-color: rgb(252, 207, 238);">
+                        <li class="menu-text"><b>{{session_username}}</b></li>
                         <li>
                             <a href="/logout">Logout</a>
                         </li>
@@ -99,7 +100,7 @@ P01
                                             <div class = 'paper'>
                                                 <p class="fade">{{ i['description'] }}</p>
                                                 <form method = "GET">
-                                                <button class="button" value = "{{ i['name'] }}"> Profile? </button>
+                                                <a href={{ url_for('character_profile', id=i['id']) }} class="button">Profile</a>
                                                 </form>
                                             </div>
                                         </div>

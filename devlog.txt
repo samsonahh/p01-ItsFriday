@@ -168,10 +168,11 @@ Added LoveCalculator_calculate(character0, character1) function to api_functions
 It takes in two characters and returns a compatibility percentage (integer out of 100) based on the LoveCalculator API
 ==============================================================
 
-samsonW -- 2022-12-19 8:19
+samsonW -- 2022-12-19 9:10
 --------------------------------------------------------------
 stripped all user input
 added tab icon to pages (doesn't work for pages with args)
 changed profile.html and compatibility.html to fit newer site styling
 Profile? button reroutes to profile page with its id
+added session username to all pages
 ==============================================================
