@@ -229,7 +229,6 @@ def LoveCalculator_calculate(character0, character1):
 #print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
 #print(type(LoveCalculator_calculate("John", "Alice")))
 
-<<<<<<< HEAD
 def get_ten_quotes(character):
     url = 'https://animechan.vercel.app/api/quotes/character?name=' + character
     res = requests.get(url) 
@@ -242,11 +241,10 @@ def get_ten_quotes(character):
     #character = json['character']
     return quote
 
-get_ten_quotes('naruto')
+# get_ten_quotes('naruto')
 #Uses HuggingFace API to get a quote analysis
 #def quote_analysis(quotes):
  #   get_ten_quotes(Naruto)
-=======
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"
     res = requests.get(url)
@@ -268,4 +266,3 @@ def get_char_info_by_id(id):
         image = data["attributes"]["image"]["original"]
     output.append({"name": en_name, "description": description, "image": image, "id": id})
     return output
->>>>>>> 7a29bf1351c7e0abca9fbab789fa675be378658f

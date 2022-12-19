@@ -176,3 +176,8 @@ changed profile.html and compatibility.html to fit newer site styling
 Profile? button reroutes to profile page with its id
 added session username to all pages
 ==============================================================
+
+samsonW -- 2022-12-19 14:45
+--------------------------------------------------------------
+in the middle of redoing search_results.html
+==============================================================
