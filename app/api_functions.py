@@ -3,31 +3,34 @@
 # P01
 
 import requests
-
+import os 
 #get all the keys
-# def apparatus_key_HuggingFace():
-#     try:
-#         with open('app/keys/key_HuggingFace.txt', 'r') as f:
-#             KEY_HuggingFace = f.read()
-#             return KEY_HuggingFace
-#     except: 
-#         return '0'
+def apparatus_key_HuggingFace():
+    try:
+        wd = os.path.dirname(os.path.realpath(__file__))
+        file = open(wd + "/keys/key_HuggingFace.txt", "r")
+        key = file.read()
+        return key
+    except: 
+        return 'False'
         
-# def apparatus_key_LoveCalculator():
-#     try:
-#         with open('app/keys/key_LoveCalculator.txt', 'r') as f:
-#             KEY_LoveCalculator= f.read()
-#             return KEY_LoveCalculator
-#     except: 
-#         return '0'
+def apparatus_key_LoveCalculator():
+    try:
+        wd = os.path.dirname(os.path.realpath(__file__))
+        file = open(wd + "/keys/key_LoveCalculator.txt", "r")
+        key = file.read()
+        return key
+    except: 
+        return 'False'
     
-# def apparatus_key_MyAnimeList():
-#     try:
-#         with open('app/keys/key_MyAnimeList.txt', 'r') as f:
-#             KEY_MyAnimeList= f.read()
-#             return KEY_MyAnimeList
-#     except: 
-#         return '0'
+def apparatus_key_MyAnimeList():
+    try:
+        wd = os.path.dirname(os.path.realpath(__file__))
+        file = open(wd + "/keys/key_MyAnimeList.txt", "r")
+        key = file.read()
+        return key
+    except: 
+        return 'False'
 
 with open('app/keys/key_HuggingFace.txt', 'r') as f:
     KEY_HuggingFace = f.read()
@@ -226,6 +229,7 @@ def LoveCalculator_calculate(character0, character1):
 #print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
 #print(type(LoveCalculator_calculate("John", "Alice")))
 
+<<<<<<< HEAD
 def get_ten_quotes(character):
     url = 'https://animechan.vercel.app/api/quotes/character?name=' + character
     res = requests.get(url) 
@@ -242,3 +246,26 @@ get_ten_quotes('naruto')
 #Uses HuggingFace API to get a quote analysis
 #def quote_analysis(quotes):
  #   get_ten_quotes(Naruto)
+=======
+def get_char_info_by_id(id):
+    url = f"https://kitsu.io/api/edge/characters/{id}"
+    res = requests.get(url)
+    json = res.json()
+    output = []
+    data = json['data']
+    id = data["id"]
+    en_name = data["attributes"]["names"]["en"]
+        # Sometimes jp name is null...
+        # if data["attributes"]["names"]["ja_jp"] is None: 
+        #     jp_name = "None"
+        # else: 
+        #     jp_name = data["attributes"]["names"]["ja_jp"]
+    description = data["attributes"]["description"]
+        #print (description)
+    if data["attributes"]["image"] is None:
+        image = "https://media.kitsu.io/characters/images/8266/original.jpg"
+    else :
+        image = data["attributes"]["image"]["original"]
+    output.append({"name": en_name, "description": description, "image": image, "id": id})
+    return output
+>>>>>>> 7a29bf1351c7e0abca9fbab789fa675be378658f
