@@ -39,8 +39,9 @@ def home():
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         if request.method == 'POST':
             print(request.form)
-            if len(request.form['character_search']) > 0: # checks if the input is blank
-                return redirect(url_for("search_results", media = "Character", input = request.form['character_search'], page = 0))
+            user_search = request.form['character_search'].strip()
+            if len(user_search) > 0: # checks if the input is blank
+                return redirect(url_for("search_results", media = "Character", input = user_search, page = 0))
     return render_template("home.html", login_status = loginstatus, session_username = sessionusername)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -104,8 +105,9 @@ def search_results(media, input, page):
     # return redirect(url_for('character_profile'), input = character_name)
     if request.method == 'POST':
         if 'input' in request.form: #if user is searching for a new character
-            if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("search_results", media = request.form['media'], input = request.form['input'], page = 1))
+            user_search = request.form['input'].strip()
+            if len(user_search) > 0: # checks if the input is blank
+                return redirect(url_for("search_results", media = request.form['media'], input = user_search, page = 1))
         # if 'character' in request.form: #if user is accessing a character profile
             #redirect to url of that character's profile
 
@@ -126,8 +128,9 @@ def match():
 
     if request.method == 'POST': # process searching functionality for character in match.html
         if 'input' in request.form:
-            if len(request.form['input']) > 0: # checks if the input is blank
-                return redirect(url_for("match_search", media = request.form['media'], input = request.form['input'], page = 1))
+            user_search = request.form['input'].strip()
+            if len(user_search) > 0: # checks if the input is blank
+                return redirect(url_for("match_search", media = request.form['media'], input = user_search, page = 1))
         elif 'match_one' in request.form:
             session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
             session.modified = True

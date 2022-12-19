@@ -7,28 +7,37 @@ P01
 <html>
     <head>
         <title>Anime Love Calculator: Compatibility</title>
+        <link rel="icon" href="static/assets/logo5.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="../static/css/match.css") }}/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>
     </head>
-<!--                          TITLE AT TOP                             -->
-<h1 class="text-center"><a href="/">Anime Love Calculator</a></h1>
-<!--                          TITLE AT TOP END                             -->
+    <body>
+        <!--                          TITLE AT TOP                             -->
+        <div class="grid-x">
+            <div class="cell small-2 medium-2 large-2"></div>
+            <div class="cell small-8 medium-8 large-8"><a href="/"><img src={{ url_for('static', filename="../static/assets/logo3.png") }}></a></div>
+            <div class="cell small-2 medium-2 large-2"></div>
+        </div>
+        <!--                          TITLE AT TOP END                             -->
 
-<!--                          NAVBAR                             -->
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <ul class="menu horizontal">
-                <li><a href="/">Home</a></li>
-                <li><a href="/profile">Character Information</a></li>
-                <li><a href="/match">Match</a></li>
-            </ul>
-        </div>
-        <div class="top-bar-right">
-            <ul class="menu horizontal">
-                <li>
-                    <a href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-<!--                          NAVBAR END                                        -->
+        <!--                          NAVBAR                             -->
+            <div class="top-bar" style="background-color: rgb(252, 207, 238);">
+                <div class="top-bar-left">
+                    <ul class="menu horizontal" style="background-color: rgb(252, 207, 238);">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/match">Match</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu horizontal" style="background-color: rgb(252, 207, 238);">
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        <!--                          NAVBAR END                                        -->
+        
 </html>
