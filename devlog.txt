@@ -142,7 +142,7 @@ danielH -- 2022-12-14 23:03
 match.html css and touchups
 ==============================================================
 
-ericaL & veritL-- 2022-12-19 14:06
+ericaL & veritL -- 2022-12-19 14:06
 --------------------------------------------------------------
 created serach_results.html
 create route for character_profile 
@@ -177,7 +177,7 @@ Profile? button reroutes to profile page with its id
 added session username to all pages
 ==============================================================
 
-ericaL & veritL-- 2022-12- 14:31
+ericaL & veritL -- 2022-12- 14:31
 --------------------------------------------------------------
 Worked on function to get 10 quotes based on an inputed anime character.
 ==============================================================
@@ -185,4 +185,9 @@ Worked on function to get 10 quotes based on an inputed anime character.
 samsonW -- 2022-12-19 14:45
 --------------------------------------------------------------
 in the middle of redoing search_results.html
+==============================================================
+
+veritL -- 2022-12-20 1:36
+--------------------------------------------------------------
+Finished get_ten_quotes() function
 ==============================================================
