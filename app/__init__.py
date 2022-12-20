@@ -164,6 +164,8 @@ def match_search(media, input, page):
     page = int(page)
     if page > diction[1]:
         page = diction[1] # ISSUE: STILL ALLOWS URL TO GO BEYOND MAX
+    if page < 1:
+        page = 1
     previous_ellipsis = True
     future_ellipsis = True
     previous = []
@@ -197,6 +199,8 @@ def match_search_show_character(id, page):
     page = int(page)
     if page > diction[1]:
         page = diction[1]
+    if page < 1:
+        page = 1
     previous_ellipsis = True
     future_ellipsis = True
     previous = []
@@ -240,11 +244,17 @@ def character_profile(id):
     return render_template("profile.html", session_username = session['username'], display_id = id)
 
 
-@app.route('/compatibility')
+@app.route('/compatibility', methods=['GET', 'POST'])
 def compatibility():
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
-
+    if request.method == 'POST':
+        char_one = session['match_one']
+        char_two = session['match_one']
+        session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+        session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+        session.modified = True
+        return render_template("compatibility.html", session_username = session['username'], char_one = char_one, char_two = char_two)
     return render_template("compatibility.html", session_username = session['username'])
 
 
