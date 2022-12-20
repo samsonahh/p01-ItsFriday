@@ -32,14 +32,15 @@ def apparatus_key_MyAnimeList():
     except: 
         return 'False'
 
-with open('app/keys/key_HuggingFace.txt', 'r') as f:
-    KEY_HuggingFace = f.read()
+# print(apparatus_key_HuggingFace())
+# with open('app/keys/key_HuggingFace.txt', 'r') as f:
+#     KEY_HuggingFace = f.read()
 
-with open('app/keys/key_LoveCalculator.txt', 'r') as f:
-    KEY_LoveCalculator = f.read()
+# with open('app/keys/key_LoveCalculator.txt', 'r') as f:
+#     KEY_LoveCalculator = f.read()
 
-with open('app/keys/key_MyAnimeList.txt', 'r') as f:
-    KEY_MyAnimeList = f.read()
+# with open('app/keys/key_MyAnimeList.txt', 'r') as f:
+#     KEY_MyAnimeList = f.read()
 
 #print(KEY_HuggingFace)
 
@@ -215,15 +216,17 @@ def LoveCalculator_calculate(character0, character1):
     querystring = {"sname":character0,"fname":character1}
 
     headers = {
-        "X-RapidAPI-Key": KEY_LoveCalculator,
+        "X-RapidAPI-Key": apparatus_key_LoveCalculator(),
         "X-RapidAPI-Host": "love-calculator.p.rapidapi.com"
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    json = response.json()
-    compatibility = json["percentage"] #NOTE: this returns a string of an integer number 0-100
-    compatibility = int(compatibility)
-    
+    if response.status_code == 200:
+        json = response.json()
+        compatibility = json["percentage"] #NOTE: this returns a string of an integer number 0-100
+        compatibility = int(compatibility)
+    else: 
+        compatibility = -1 #NOTE: if key is missing or does not work, -1 is returned 
     return compatibility
 #LoveCalculator_calculate() tests:
 #print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
@@ -237,6 +240,9 @@ def get_ten_quotes(character):
     #print(type(json))
     #print(json)
     quote = json[0]['quote']
+    valid_name = json[0]['character']
+    if valid_name != character:
+        return ['False']
     list = []
     for i in json: #for each one of the dictionaries in json (which each has a quote)...
         #print(i)
@@ -244,7 +250,7 @@ def get_ten_quotes(character):
     #print(list) 
     return list
 #test for get_ten_quotes
-print(get_ten_quotes('naruto'))
+print(get_ten_quotes('Uryuu Ishida'))
 
 
 #Uses HuggingFace API to get a quote analysis

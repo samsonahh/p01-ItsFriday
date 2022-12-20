@@ -203,12 +203,6 @@ P01
                     <li class="ellipsis" aria-hidden="true"></li>
                     <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + diction[1]|string }}" aria-label="Page {{ diction[1] }}">{{ diction[1] }}</a></li>
                 {% endif %}
-                <!-- <li><a href="#" aria-label="Page 2">2</a></li>
-                <li><a href="#" aria-label="Page 3">3</a></li>
-                <li><a href="#" aria-label="Page 4">4</a></li>
-                <li class="ellipsis" aria-hidden="true"></li>
-                <li><a href="#" aria-label="Page 12">12</a></li>
-                <li><a href="#" aria-label="Page 13">13</a></li> -->
                 {% if pagination['page'] == diction[1] %}
                     <li class="pagination-next disabled">Next <span class="show-for-sr">page</span></li>
                 {% elif diction[1] > pagination['page'] %}
