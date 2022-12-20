@@ -240,8 +240,13 @@ def match_test():
 def character_profile(id):
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
+    
+    dictionary = api.get_char_info_by_id(int(id))
 
-    return render_template("profile.html", session_username = session['username'], display_id = id)
+    print(dictionary)
+
+
+    return render_template("profile.html", session_username = session['username'], dict = dictionary)
 
 
 @app.route('/compatibility', methods=['GET', 'POST'])

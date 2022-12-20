@@ -34,7 +34,7 @@ P01
             <!--                          NAVBAR END                            -->
         </div>
         <!--                          LETS GET STARTED CONTAINER                            -->
-        <div class="grid-container fluid paralarx" style="background-color: #FFFFFF;">
+        <div class="grid-container fluid paralarx" style="background-color: #FFFFFF; height: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{ url_for('static', filename='../static/assets/prntscrn.png') }}); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
             <div class="grid-y grid-padding-y" style="height: 90vh;">
                 <div class = "cell large-10">
                     <div class="text-center">
@@ -43,14 +43,23 @@ P01
                             <input type="submit" class="button" value="Search" name="sub1">
                         </form>
                     </div>
-                                {% if media != 'None' %}
-                                        {% for i in diction[0] %}
-                                        <h4 class="title">{{ i['name'] }}</h4>
-                                            <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
-                                                <a href={{ url_for('character_profile', id=i['id']) }}><img src="{{i['image']}}" style="width: 100px; height: auto;" class="touch"></a>
-                                            </button>
-                                        {% endfor %}
-                                {% endif %}
+                    <div class="orbit" role="region" aria-label="Search Results" data-orbit>
+                        <!-- <ul class="orbit-container"> -->
+                            {% if media != 'None' %}
+                                {% for i in diction[0] %}
+                                    <!-- <li class="orbit-slide is-active">
+                                        <figure class="orbit-figure">
+                                            <img class="orbit-image" src="assets/img/orbit/01.jpg" alt="Space">
+                                            <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
+                                        </figure>
+                                    </li> -->
+                                    <h4 class="title" style="color: #FFFFFF;">{{ i['name'] }}</h4>
+                                    <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
+                                        <a href={{ url_for('character_profile', id=i['id']) }}><img src="{{i['image']}}" style="width: 100px; height: auto;" class="touch"></a>
+                                    </button>
+                                {% endfor %}
+                            {% endif %}
+                         <!-- </ul> -->
                     </div>
                 </div>
             </div>

@@ -51,8 +51,6 @@ body {
 }
 
 .image{
-  width: 225px;
-  max-height: 300px;
   transition: transform 0.5s;
 }
 
@@ -60,5 +58,5 @@ body {
   transform: scale(0.9,0.9);
 }
 .cella{
-  text-align: center;
+
 }
