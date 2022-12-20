@@ -258,9 +258,10 @@ def quote_analysis(quote):
     API_TOKEN = apparatus_key_HuggingFace()
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     payload = {'input': quote }
-    response = requests.post(API_URL, headers=headers, json=payload)
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
     print(response)
-    return response.json()
+    return json.loads(response.content.decode("utf-8"))
 
 print(quote_analysis("hi"))
 
