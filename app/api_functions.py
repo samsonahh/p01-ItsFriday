@@ -257,12 +257,8 @@ def quote_analysis(quote):
     API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
     API_TOKEN = apparatus_key_HuggingFace()
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
-    payload = {'input': quote }
-    data = json.dumps(payload)
-    response = requests.request("POST", API_URL, headers=headers, data=data)
-    print(response)
-    return json.loads(response.content.decode("utf-8"))
-
+    response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
+    return(response.json())
 print(quote_analysis("hi"))
 
  
@@ -287,3 +283,5 @@ def get_char_info_by_id(id):
         image = data["attributes"]["image"]["original"]
     output.append({"name": en_name, "description": description, "image": image, "id": id})
     return output
+
+

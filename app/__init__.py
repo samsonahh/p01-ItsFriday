@@ -147,10 +147,12 @@ def match():
                 if session['match_one']['image'] == 'false':
                     session['match_one'] = {'image': request.args['image'], 'id': request.args['id'], 'name': request.args['name']}
                     session.modified = True
-                    return redirect(request.referrer) # returns to url the request was made from (so you still see the search results)
                 elif session['match_two']['image'] == 'false':
                     session['match_two'] = {'image': request.args['image'], 'id': request.args['id'], 'name': request.args['name']}
                     session.modified = True
+                if 'profile' in request.args:
+                    return redirect('/match')
+                else:
                     return redirect(request.referrer) # returns to url the request was made from (so you still see the search results)
     return render_template("match.html", session_username = session['username'], diction = None, media = "None")
 
