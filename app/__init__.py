@@ -250,11 +250,12 @@ def compatibility():
         return redirect(url_for('login'))
     if request.method == 'POST':
         char_one = session['match_one']
-        char_two = session['match_one']
+        char_two = session['match_two']
         session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session.modified = True
-        return render_template("compatibility.html", session_username = session['username'], char_one = char_one, char_two = char_two)
+        compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
+        return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility)
     return render_template("compatibility.html", session_username = session['username'])
 
 

@@ -250,13 +250,20 @@ def get_ten_quotes(character):
     #print(list) 
     return list
 #test for get_ten_quotes
-print(get_ten_quotes('Uryuu Ishida'))
+#print(get_ten_quotes('Uryuu Ishida'))
 
+#Uses HuggingFace API to get a quote analysis for an inputed string
+def quote_analysis(quote):
+    API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
+    API_TOKEN = apparatus_key_HuggingFace()
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    payload = {'input': quote }
+    response = requests.post(API_URL, headers=headers, json=payload)
+    print(response)
+    return response.json()
 
-#Uses HuggingFace API to get a quote analysis
-#def quote_analysis(quotes):
- #   get_ten_quotes(Naruto)
- 
+print(quote_analysis("hi"))
+
  
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"
