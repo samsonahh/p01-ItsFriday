@@ -44,22 +44,22 @@ P01
                         </form>
                     </div>
                     <div class="orbit" role="region" aria-label="Search Results" data-orbit>
-                        <ul class="orbit-container">
+                        <!-- <ul class="orbit-container"> -->
                             {% if media != 'None' %}
                                 {% for i in diction[0] %}
-                                    <li class="orbit-slide is-active">
+                                    <!-- <li class="orbit-slide is-active">
                                         <figure class="orbit-figure">
                                             <img class="orbit-image" src="assets/img/orbit/01.jpg" alt="Space">
                                             <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
                                         </figure>
-                                    </li>
+                                    </li> -->
                                     <h4 class="title" style="color: #FFFFFF;">{{ i['name'] }}</h4>
                                     <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
                                         <a href={{ url_for('character_profile', id=i['id']) }}><img src="{{i['image']}}" style="width: 100px; height: auto;" class="touch"></a>
                                     </button>
                                 {% endfor %}
                             {% endif %}
-                         </ul>
+                         <!-- </ul> -->
                     </div>
                 </div>
             </div>
