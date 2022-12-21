@@ -38,9 +38,18 @@ P01
         </div>
         <!--                          LETS GET STARTED CONTAINER                            -->
         <div class="grid-container fluid paralarx" style="background-color: #FFFFFF; height: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{ url_for('static', filename='../static/assets/prntscrn.png') }}); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
-            <div class="grid-y grid-padding-y" style="height: 90vh;">
+            <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
                 <div class = "cell large-10">
                     <div class="text-center">
+                        <div>
+                            <h1 class="text-center Letsgo" style="color: aliceblue;">Let's get started</h1>
+                        </div>
+                        <div>
+                            <p class="text-center" style="color: aliceblue;">
+                                Curious about anime character relationships?<br>
+                                Start by searching for a character!<br>
+                            </p>
+                        </div>
                         <form id="generate" method="POST">
                             <input type="text" name="input" placeholder="Character name" id="input" style="display: block; width: 200px; margin: 0 auto;"> <br>
                             <input type="submit" class="button" value="Search" name="sub1">
@@ -69,10 +78,39 @@ P01
                         </div>
                     </div>
                 </div>
+                <div class = "cell large-2" style="text-align: center;">
+                    <i class="fi-arrow-down iconica"></i>
+                </div>
             </div>
         </div>
     <!--                          LETS GET STARTED CONTAINER END                            -->
-
+ <!--                          check out matches CONTAINER                            -->
+ <div class="grid-x paralarx" style="scroll-snap-align: start;">
+    <div class="cell small-1 medium-1 large-1" style="background-color:#ffffff00;"></div>
+    <div class="cell small-10 medium-10 large-10">
+        <div class="grid-container fluid" style="background-color: #FFFFFF;">
+            <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
+                <div class="cell small-12 medium-12 large-12">
+                
+                    <div>
+                        <h1 class="text-center">Compatibility</h1>
+                    </div>
+                    <div>
+                        <p class="text-center">
+                            Skip straight to matching anime characters
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <a class="button" href="/match">Match</a>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cell small-1 medium-1 large-1" style="opacity: 0;"></div>
+</div>
+<!--                          check out matches CONTAINER END                            -->
     <script>
         $(document).ready(function() {
            $(document).foundation();
