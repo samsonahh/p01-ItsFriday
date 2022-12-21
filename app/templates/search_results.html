@@ -11,7 +11,7 @@ P01
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" integrity="sha512-kDmbIQZ10fxeKP5NSt3+tz77HO42IJiS+YPIirOIKTdokl4LtuXYo3NNvq9mTAF+rzdV1plp0sm9E6nvtVpnFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-        <link rel="stylesheet" type="text/css" href="../static/css/home.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename="../static/css/home.css") }}"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" integrity="sha256-WUKHnLrIrx8dew//IpSEmPN/NT3DGAEmIePQYIEJLLs= sha384-53StQWuVbn6figscdDC3xV00aYCPEz3srBdV/QGSXw3f19og3Tq2wTRe0vJqRTEO sha512-X9O+2f1ty1rzBJOC8AXBnuNUdyJg0m8xMKmbt9I3Vu/UOWmSg5zG+dtnje4wAZrKtkopz/PEDClHZ1LXx5IeOw==" crossorigin="anonymous"></script>
@@ -19,7 +19,7 @@ P01
     <body>
         <div style="scroll-snap-align: start;">
             <!--                          NAVBAR                             -->
-                    <div class="top-bar" style="background-color: rgb(255, 255, 255); position: sticky; top: 0; height: 10vh;">
+                    <div class="top-bar" style="background-color: rgb(255, 255, 255); position: sticky; top: 0; height: 10vh; z-index: 100;">
                         <div class="top-bar-left">
                             <ul class="menu horizontal" style="background-color: rgba(255, 209, 217, 0);">
                                 <li class="menu-text"><a href="/">Anime Love Calculator</a></li>
@@ -35,10 +35,9 @@ P01
                         </div>
                     </div>
             <!--                          NAVBAR END                            -->
-        </div>
         <!--                          LETS GET STARTED CONTAINER                            -->
-        <div class="grid-container fluid paralarx" style="background-color: #FFFFFF; height: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url({{ url_for('static', filename='../static/assets/prntscrn.png') }}); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
-            <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
+        <div class="grid-container fluid paralarx" style="background-color: #FFFFFF">
+            <div class="grid-y grid-padding-y" style="height: 90vh;">
                 <div class = "cell large-10">
                     <div class="text-center">
                         <div>
@@ -54,27 +53,27 @@ P01
                             <input type="text" name="input" placeholder="Character name" id="input" style="display: block; width: 200px; margin: 0 auto;"> <br>
                             <input type="submit" class="button" value="Search" name="sub1">
                         </form>
-                    </div>
-                    <div class="orbit" role="region" aria-label="Characters" data-orbit data-use-m-u-i="false">
-                        <div class="orbit-wrapper">
-                            <div class="orbit-controls">
-                                <button class="orbit-previous"><span class="show-for-sr">Previous</span>&#9664;&#xFE0E;</button>
-                                <button class="orbit-next"><span class="show-for-sr">Next</span>&#9654;&#xFE0E;</button>
+                        <div class="orbit" role="region" aria-label="Characters" data-orbit data-use-m-u-i="false">
+                            <div class="orbit-wrapper">
+                                <div class="orbit-controls">
+                                    <button class="orbit-previous"><span class="show-for-sr">Previous</span>&#9664;&#xFE0E;</button>
+                                    <button class="orbit-next"><span class="show-for-sr">Next</span>&#9654;&#xFE0E;</button>
+                                </div>
+                                <ul class="orbit-container text-center">
+                                    {% if media != 'None' %}
+                                        {% for i in diction[0] %}
+                                        <li class="orbit-slide">    
+                                            <figure class="orbit-figure">
+                                                <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
+                                                    <a href={{ url_for('character_profile', id=i['id']) }}><img class="orbit-image" src="{{ i['image'] }}" alt="charimage" style="height: auto; width: 200px;"></a>
+                                                </button>
+                                                <figcaption class="orbit-caption">{{ i['name'] }}</figcaption>
+                                            </figure>                     
+                                        </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
                             </div>
-                            <ul class="orbit-container text-center">
-                                {% if media != 'None' %}
-                                    {% for i in diction[0] %}
-                                    <li class="orbit-slide">    
-                                        <figure class="orbit-figure">
-                                            <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
-                                                <a href={{ url_for('character_profile', id=i['id']) }}><img class="orbit-image" src="{{ i['image'] }}" alt="charimage" style="height: auto; width: 200px;"></a>
-                                            </button>
-                                            <figcaption class="orbit-caption">{{ i['name'] }}</figcaption>
-                                        </figure>                     
-                                    </li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
                         </div>
                     </div>
                 </div>
