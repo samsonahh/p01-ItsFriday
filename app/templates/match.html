@@ -15,10 +15,8 @@ P01
     </head>
     <body>
         <!--                          TITLE AT TOP                             -->
-        <div class="grid-x">
-            <div class="cell small-2 medium-2 large-2"></div>
-            <div class="cell small-8 medium-8 large-8"><a href="/"><img src={{ url_for('static', filename="../static/assets/logo3.png") }}></a></div>
-            <div class="cell small-2 medium-2 large-2"></div>
+        <div style="text-align: center;">
+            <div style="text-align: center;"><a href="/"><img src={{ url_for('static', filename="../static/assets/logo3.png") }} style="width:700px; max-height:auto;"></a></div>
         </div>
         <!--                          TITLE AT TOP END                             -->
 
@@ -51,18 +49,16 @@ P01
                             <option value="Show">Show</option>
                         </select>                                                  
                     </div>
-                    <div class="cell small-3 medium-3 large-3">
+                    <div class="cell small-auto medium-auto large-auto">
                         <label for="input">Query:</label>
-                        <div class="input-group">
-                            <input class="input-group-field" type="text" name="input" placeholder="Search" id="input" style="width:400px;">
+                        <div class="input-group" style="width:400px;">
+                            <input class="input-group-field" type="text" name="input" placeholder="Search" id="input">
                             <div class="input-group-button">
                               <input type="submit" class="button" value="Submit" name="sub1">
                             </div>
                           </div>
                     </div>
-                    <div class="cell small-2 medium-2 large-2">
-                    </div>
-                    <div class="cell small-6 medium-6 large-6"></div>
+                    
                 </div> 
             </form>
         </div>
@@ -115,6 +111,13 @@ P01
                                 </div> 
                             {% endfor %}
                         {% endif %}
+                    {% else %}
+                        <div class="callout warning" style="width: 100%; height: 100%; margin: 10vh 10vw;">
+                            <div class="alert">
+                                <h5>Start Searching!</h5>
+                                <p>Lourem ipsum</p>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>

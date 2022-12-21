@@ -259,7 +259,7 @@ def quote_analysis(quote):
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
     return(response.json())
-print(quote_analysis("hi"))
+#print(quote_analysis("hi"))
 
  
 def get_char_info_by_id(id):
