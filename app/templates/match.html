@@ -43,7 +43,7 @@ P01
         <div>
             <form method = "POST" action="/match">
                 <div class="grid-x grid-padding-x">
-                    <div class="cell small-12 medium-6 large-5" style="background-color: rgb(249, 142, 210); height: 60px; border-bottom-right-radius: 30px; padding: 15px 0 0 15px; width: 600px;">
+                    <div class="cell small-12 medium-6 large-5" style="background-color: rgb(249, 142, 210); height: 60px; border-bottom-right-radius: 30px;border-top-right-radius: 30px; padding: 15px 0 0 15px; width: 500px;">
                         <div class="input-group" style="width: 400px;">
                             <div class="input-group-field">
                                 <select name="media" id="media" style="height: 30px; width: 110px; background-color: rgb(255, 210, 239); border: none; color: white;">
@@ -136,7 +136,7 @@ P01
                                 <div class="cell small-1 medium-1 large-1">
                                     {% if session['match_one']['image'] != 'false' and session['match_two']['image'] != 'false' %}
                                     <form method = 'POST' action = '/compatibility'>
-                                        <button class="button success" type="submit" name="match" value="True" style="color: aliceblue; width: 205px; background-image: linear-gradient(150deg, #3adb76 60%, #fdfd61); border-radius: 10px; border-width: 3px;">
+                                        <button class="button success" type="submit" name="match" value="True" style="color: aliceblue; width: 205px; border-radius: 10px; border-width: 3px;">
                                             <b>Match!</b>
                                         </button>
                                     </form>

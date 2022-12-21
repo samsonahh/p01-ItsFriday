@@ -258,9 +258,10 @@ def quote_analysis(quote):
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
     return(response.json())
 #print(quote_analysis("hi"))
-
+def initialize_dict():
+    return {'neutral': '', 'surprise':'', 'sadness':'', 'anger':'', 'joy':'', 'disgust':'','fear':''}
 def tenquotes_analysis(dict):
-    for i in array: 
+    for i in dict: 
         quote_analysis([i][0])
 
 def get_char_info_by_id(id):
