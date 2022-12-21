@@ -257,12 +257,14 @@ def quote_analysis(quote):
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
     return(response.json())
-#print(quote_analysis("hi"))
-def initialize_dict():
-    return {'neutral': '', 'surprise':'', 'sadness':'', 'anger':'', 'joy':'', 'disgust':'','fear':''}
-def tenquotes_analysis(dict):
+print(quote_analysis("hi"))
+    
+#def initialize_dict():
+#    return {'neutral': '', 'surprise':'', 'sadness':'', 'anger':'', 'joy':'', 'disgust':'','fear':''}
+
+def ten_quote_analysis(dict):
     for i in dict: 
-        quote_analysis([i][0])
+
 
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"

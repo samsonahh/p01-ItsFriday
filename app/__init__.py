@@ -34,6 +34,7 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
+        print('CCCCCCCCCCC')
         session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         if request.method == 'POST':
@@ -243,10 +244,7 @@ def character_profile(id):
         return redirect(url_for('login'))
     
     dictionary = api.get_char_info_by_id(int(id))
-
     print(dictionary)
-
-
     return render_template("profile.html", session_username = session['username'], dict = dictionary)
 
 
@@ -260,10 +258,12 @@ def compatibility():
         session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session.modified = True
-        compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
+        if char_one['id'] == char_two['id']:
+            compatibility = 100
+        else:
+            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
         return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility)
     return render_template("compatibility.html", session_username = session['username'])
-
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
