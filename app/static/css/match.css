@@ -51,6 +51,7 @@ body {
 }
 
 .image{
+  max-width: 205px;
   transition: transform 0.5s;
 }
 
@@ -58,5 +59,18 @@ body {
   transform: scale(0.9,0.9);
 }
 .cella{
-
 }
+
+.inpu{
+  border: none; outline: none; box-shadow:none;
+  border-bottom: 2px solid blue;
+}
+
+.pink:hover{
+  background-color:rgb(235, 134, 198);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(255, 210, 239);
+  opacity: 1; /* Firefox */
+  }

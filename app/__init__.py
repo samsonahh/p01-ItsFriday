@@ -34,7 +34,6 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        print('CCCCCCCCCCC')
         session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         if request.method == 'POST':
