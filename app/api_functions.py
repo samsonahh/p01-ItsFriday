@@ -210,9 +210,7 @@ def pagination_id(id, page):
 
 #Takes in two characters and returns a compatibility percentage (integer out of 100) based on the LoveCalculator API
 def LoveCalculator_calculate(character0, character1):
-    
     url = "https://love-calculator.p.rapidapi.com/getPercentage"
-
     querystring = {"sname":character0,"fname":character1}
 
     headers = {
@@ -261,7 +259,6 @@ def quote_analysis(quote):
     return(response.json())
 #print(quote_analysis("hi"))
 
- 
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"
     res = requests.get(url)
@@ -283,5 +280,3 @@ def get_char_info_by_id(id):
         image = data["attributes"]["image"]["original"]
     output.append({"name": en_name, "description": description, "image": image, "id": id})
     return output
-
-
