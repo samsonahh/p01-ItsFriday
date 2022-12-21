@@ -259,6 +259,10 @@ def quote_analysis(quote):
     return(response.json())
 #print(quote_analysis("hi"))
 
+def tenquotes_analysis(dict):
+    for i in array: 
+        quote_analysis([i][0])
+
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"
     res = requests.get(url)
