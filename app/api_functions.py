@@ -270,19 +270,66 @@ def get_ten_quotes(character, boolean):
 print(get_ten_quotes('red', True))
 #print(['a'] == [])
 #Uses HuggingFace API to get a quote analysis for an inputed string
+#returns a dictionary filled with keys pertaining to the emotions:
+#anger, disgust, fear, joy, neutral, sadness, and surprise
 def quote_analysis(quote):
     API_URL = "https://api-inference.huggingface.co/models/j-hartmann/emotion-english-distilroberta-base"
     API_TOKEN = apparatus_key_HuggingFace()
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
-    return(response.json())
+    response = response.json()[0]
+    emotion_dict = {}
+    for i in response:
+        emotion_dict[i['label']] = i['score']
+    return(emotion_dict)
+#print('quote_analysis(quote) function tests:')
 #print(quote_analysis("hi"))
-    
-#def initialize_dict():
-#    return {'neutral': '', 'surprise':'', 'sadness':'', 'anger':'', 'joy':'', 'disgust':'','fear':''}
+#print(quote_analysis("i am happy"))
 
-# def ten_quote_analysis(dict):
-#     for i in dict: 
+
+#takes in a list of quotes and returns the a dictionary with the mean of each sentiment
+#used in the quote_analysis(quote) function
+def ten_quote_analysis(quotes_list):
+    #set up initial averaged_emotion_dict
+    averaged_emotion_dict = {'neutral': 0.0, 'surprise':0.0, 'sadness':0.0, 'anger':0.0, 'joy':0.0, 'disgust':0.0,'fear':0.0}
+   
+    #accumulate all emotion ratings of the 10 quotes
+    for i in quotes_list: 
+        emotion_dict = quote_analysis(i)
+        for emotion in emotion_dict:
+            #print(emotion + ": " + str(averaged_emotion_dict[emotion]))  #this is test code
+            averaged_emotion_dict[emotion] += emotion_dict[emotion] 
+        #print("-----")   #this is test code
+        
+    #divide by 10 for each emotion to get the mean
+    for emotion in averaged_emotion_dict:
+        averaged_emotion_dict[emotion] /= 10.0
+        #print(emotion + ": " + str(averaged_emotion_dict[emotion]))  #this is test code
+        
+    return averaged_emotion_dict
+#print(get_ten_quotes('Naruto Uzumaki'))            
+print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki')))     
+
+
+'''
+1. Find the mean of each sentiment given a list of quote analyses respective to a character. 
+2. Isolate major sentiments from Hugging face Dataset for characters A and B
+3. Compare each major sentiment from character A to the same sentiment found in character B and find similarity of the two percentages through:   
+               1 - (|A-B| / max(A,B))	  (repeat for all major sentiments)
+4. Repeat previous step for character B 
+5. Find the mean of all the similarity percentages calculated in steps 2,3
+6. Weigh the sentiment similarity and love calculator compatibility, add, then curve the result as needed 
+'''
+def calculate_final_compatibility(character0, character1):
+    LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
+    
+    #step 1:
+    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0))
+    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1))
+    
+    #step 2: isolate major sentiments
+    
+    
 
 
 def get_char_info_by_id(id):
