@@ -258,7 +258,7 @@ def compatibility():
         if char_one['id'] == char_two['id']:
             compatibility = 100
         else:
-            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
+            compatibility = api.calculate_final_compatibility(char_one['name'], char_two['name'])
         return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility)
     return render_template("compatibility.html", session_username = session['username'])
 
@@ -276,6 +276,7 @@ def compatibility():
         list1 = api.get_char_info_by_id(char_one['id'])
         list2 = api.get_char_info_by_id(char_one)
     return render_template("compatibility.html", session_username = session['username'])
+
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True 
