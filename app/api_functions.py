@@ -307,8 +307,8 @@ def ten_quote_analysis(quotes_list):
         #print(emotion + ": " + str(averaged_emotion_dict[emotion]))  #this is test code
         
     return averaged_emotion_dict
-#print(get_ten_quotes('Naruto Uzumaki'))            
-print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki')))     
+#print(get_ten_quotes('Naruto Uzumaki', True))            
+print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki', True)))     
 
 
 '''
@@ -324,8 +324,8 @@ def calculate_final_compatibility(character0, character1):
     LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
     
     #step 1:
-    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0)) #this is a dictionary
-    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1))
+    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0, True)) #this is a dictionary
+    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1, True))
     
     #step 2: isolate major sentiments (major sentiment defined as >40% for now)
     major_sentiment_threshold = 0.40
