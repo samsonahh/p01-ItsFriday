@@ -44,14 +44,14 @@ P01
         {% if list1 is not none %}
             <div class="grid-x grid-margin-x" style="margin: 0 5vh 0 5vh;">
                 <div class="cell small-12 medium-6 large-6" style="text-align: center;">
-                    <h1>{{list1[0]['name']}}</h1>
-                    <img src={{list1[0]['image']}} style="width: 13vw; height: auto;">
-                    <h4>Description:</h4>
+                    <h1><b>{{list1[0]['name']}}</b></h1>
+                    <a href="{{ url_for('character_profile', id=list1[0]['id']) }}"><img src={{list1[0]['image']}} style="width: 13vw; height: auto;"></a>
+                    <h4><b>Description:</b></h4>
                     <div style="text-align: left;">
                         {{list1[0]['description']}}
                     </div>
                     {% if final['character0_quotes'] != [] %}
-                        <h4>Quotes:</h4>
+                        <h4><b>Quotes:</b></h4>
                         <div>
                             <ul style="text-align: left;">
                                 {% for i in final['character0_quotes'] %}
@@ -71,14 +71,14 @@ P01
                     {% endif %}
                 </div>
                 <div class="cell small-12 medium-6 large-6" style="text-align: center;">
-                    <h1>{{list2[0]['name']}}</h1>
-                    <img src={{list2[0]['image']}} style="width: 13vw; height: auto;">
-                    <h4>Description:</h4>
+                    <h1><b>{{list2[0]['name']}}</b></h1>
+                    <a href="{{ url_for('character_profile', id=list2[0]['id']) }}"><img src={{list2[0]['image']}} style="width: 13vw; height: auto;"></a>
+                    <h4><b>Description:</b></h4>
                     <div style="text-align: left;">
                         {{list2[0]['description']}}
                     </div>
                     {% if final['character0_quotes'] != [] %}
-                        <h4>Quotes:</h4>
+                        <h4><b>Quotes:</b></h4>
                         <div>
                             <ul style="text-align: left;">
                                 {% for i in final['character1_quotes'] %}
