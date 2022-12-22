@@ -208,7 +208,7 @@ def pagination_id(id, page):
         output.append({"name": en_name, "description": description, "image": image, "id": id})
     return (output, max)
 
-#Takes in two characters and returns a compatibility percentage (integer out of 100) based on the LoveCalculator API
+#Takes in two characters and returns a compatibility percentage (0.0 to 1.0) based on the LoveCalculator API
 def LoveCalculator_calculate(character0, character1):
     url = "https://love-calculator.p.rapidapi.com/getPercentage"
     querystring = {"sname":character0,"fname":character1}
@@ -222,7 +222,7 @@ def LoveCalculator_calculate(character0, character1):
     if response.status_code == 200:
         json = response.json()
         compatibility = json["percentage"] #NOTE: this returns a string of an integer number 0-100
-        compatibility = int(compatibility)
+        compatibility = float(compatibility) / 100.0
     else: 
         compatibility = -1 #NOTE: if key is missing or does not work, -1 is returned 
     return compatibility
@@ -306,7 +306,7 @@ def ten_quote_analysis(quotes_list):
         
     #divide by 10 for each emotion to get the mean
     for emotion in averaged_emotion_dict:
-        averaged_emotion_dict[emotion] /= 10.0
+        averaged_emotion_dict[emotion] /= int(len(quotes_list))
         #print(emotion + ": " + str(averaged_emotion_dict[emotion]))  #this is test code
         
     return averaged_emotion_dict
@@ -327,14 +327,41 @@ def calculate_final_compatibility(character0, character1):
     LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
     
     #step 1:
-    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0, True))
+    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0, True)) #this is a dictionary
     sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1, True))
     
-    #step 2: isolate major sentiments
+    #step 2: isolate major sentiments (major sentiment defined as >40% for now)
+    major_sentiment_threshold = 0.14
+    major_sentiments = []
+    for emotion in sentiments_character0:
+        if sentiments_character0[emotion] >= major_sentiment_threshold:
+            major_sentiments.append(emotion)
+    for emotion in sentiments_character0:
+        if sentiments_character0[emotion] >= major_sentiment_threshold and major_sentiments.count(emotion) == 0:
+            major_sentiments.append(emotion)
     
+    #step 3 (and 4):
+    major_sentiment_similarity = {}
+    for emotion in  major_sentiments:
+        major_sentiment_similarity[emotion] = 1 - (abs(sentiments_character0[emotion] - sentiments_character1[emotion])/  \
+                                                   max(sentiments_character0[emotion], sentiments_character1[emotion]))
     
-
-
+    #step 5:
+    mean_major_sentiment_similarity = 0
+    for emotion in major_sentiment_similarity:
+        mean_major_sentiment_similarity += major_sentiment_similarity[emotion]
+    mean_major_sentiment_similarity /= len(major_sentiments)
+    
+    #step 6:
+    quote_analysis_weight = 0.86
+    LoveCalculator_weight = 1.0 - quote_analysis_weight
+    final_compatibility = (quote_analysis_weight * mean_major_sentiment_similarity) + \
+                          (LoveCalculator_weight * LoveCalculator_compatibility)
+    
+    return final_compatibility
+print("calculate_final_compatibility(character0, character1) function test:")
+print(calculate_final_compatibility("Naruto Uzumaki", "Tanjiro Kamado"))
+    
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"
     res = requests.get(url)
