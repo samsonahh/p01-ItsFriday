@@ -7,7 +7,7 @@ P01
 <html>
     <head>
         <title>Anime Love Calculator: Search</title>
-        <link rel="icon" href="static/assets/logo5.png">
+        <link rel="icon" href={{ url_for('static', filename="../static/assets/logo5") }}>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" integrity="sha512-kDmbIQZ10fxeKP5NSt3+tz77HO42IJiS+YPIirOIKTdokl4LtuXYo3NNvq9mTAF+rzdV1plp0sm9E6nvtVpnFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
@@ -59,7 +59,7 @@ P01
                                     <button class="orbit-previous"><span class="show-for-sr">Previous</span>&#9664;&#xFE0E;</button>
                                     <button class="orbit-next"><span class="show-for-sr">Next</span>&#9654;&#xFE0E;</button>
                                 </div>
-                                <ul class="orbit-container text-center">
+                                <ul class="orbit-container" style="display: block; width: 200px; margin: 0 auto;">
                                     {% if media != 'None' %}
                                         {% for i in diction[0] %}
                                         <li class="orbit-slide">    
@@ -67,7 +67,7 @@ P01
                                                 <button type="submit" name="id" value="{{i['id']}}" style="border: none; outline: none;">
                                                     <a href={{ url_for('character_profile', id=i['id']) }}><img class="orbit-image" src="{{ i['image'] }}" alt="charimage" style="height: auto; width: 200px;"></a>
                                                 </button>
-                                                <figcaption class="orbit-caption">{{ i['name'] }}</figcaption>
+                                                <figcaption class="orbit-caption" style="width: 200px;">{{ i['name'] }}</figcaption>
                                             </figure>                     
                                         </li>
                                         {% endfor %}
@@ -87,15 +87,15 @@ P01
  <div class="grid-x paralarx" style="scroll-snap-align: start;">
     <div class="cell small-1 medium-1 large-1" style="background-color:#ffffff00;"></div>
     <div class="cell small-10 medium-10 large-10">
-        <div class="grid-container fluid" style="background-color: #FFFFFF;">
+        <div class="grid-container fluid" style="background-color: #FFFFFF00;">
             <div class="grid-y grid-padding-y" style="height: 90vh; padding-top: 10%;">
                 <div class="cell small-12 medium-12 large-12">
                 
                     <div>
-                        <h1 class="text-center">Compatibility</h1>
+                        <h1 class="text-center" style="color: aliceblue;">Compatibility</h1>
                     </div>
                     <div>
-                        <p class="text-center">
+                        <p class="text-center" style="color: aliceblue;">
                             Skip straight to matching anime characters
                         </p>
                     </div>

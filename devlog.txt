@@ -221,3 +221,10 @@ danielH -- 2022-12-22 1:40
 --------------------------------------------------------------
 match and compatibility css/html, worked on tweaking api functions
 ==============================================================
+
+samsonW -- 2022-12-22 9:58
+--------------------------------------------------------------
+fixed image sizing on campatibility and match
+removed white box in Homepage
+centered search_results
+==============================================================

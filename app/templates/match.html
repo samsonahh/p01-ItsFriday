@@ -66,7 +66,7 @@ P01
             </form>
         </div>
         <div style="background-color: rgb(249, 142, 210); background-image:linear-gradient(rgb(249, 142, 210), rgb(252, 105, 151));">
-            <div class="grid-x grid-padding-x" id="foo" style="background-color: aliceblue; margin: 0 2vw 0 2vw; padding: 4vh 0 0 0;">
+            <div class="grid-x grid-padding-x" id="foo" style="background-color: white; margin: 0 2vw 0 2vw; padding: 4vh 0 0 0;">
                 <div class="cell small-9 medium-9 large-9">
                     <div class="grid-x grid-margin-x grid-padding-x">
                         {% if media != 'None' %}
@@ -91,7 +91,7 @@ P01
                                                 <hr>
                                                 <div class = 'paper'>
                                                     <p class="fade">{{ i['description'] }}</p>
-                                                    <a href={{ url_for('character_profile', id=i['id']) }} class="button">Profile</a>
+                                                    <a href={{ url_for('character_profile', id=i['id']) }} class="button" style="background-color: #042249;">Profile</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,8 +137,8 @@ P01
                                 <div class = "grid-y" style="height:96vh">
                                     <div class="cell small-1 medium-1 large-1">
                                         {% if session['match_one']['image'] != 'false' and session['match_two']['image'] != 'false' %}
-                                        <form method = 'POST' action = '/compatibility'>
-                                            <button class="button success" type="submit" name="match" value="True" style="color: aliceblue; width: 205px; border-radius: 10px; border-width: 3px;">
+                                        <form class="text-center" method = 'POST' action = '/compatibility'>
+                                            <button class="button success" type="submit" name="match" value="True" style="background-color: #042249; color: aliceblue; width: 13vw; border-radius: 10px; border-width: 3px;">
                                                 <b>Match!</b>
                                             </button>
                                         </form>
@@ -150,7 +150,7 @@ P01
                                         {% if session['match_one']['image'] != 'false' %}
                                             <form method="POST" action="/match">
                                                 <button type="submit" name="match_one" value="deselect">
-                                                    <img src="{{ session['match_one']['image'] }}" class="image">
+                                                    <img src="{{ session['match_one']['image'] }}" class="image" style = "width: 13vw; height: auto;">
                                                 </button>
                                             </form>
                                         {% else %}
@@ -163,7 +163,7 @@ P01
                                         {% if session['match_two']['image'] != 'false' %}
                                             <form method="POST" action="/match">
                                                 <button type="submit" name="match_two" value="deselect">
-                                                    <img src="{{ session['match_two']['image'] }}" class="image">
+                                                    <img src="{{ session['match_two']['image'] }}" class="image" style = "width: 13vw; height: auto;">
                                                 </button>
                                             </form>
                                         {% else %}
@@ -200,7 +200,7 @@ P01
                             <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + (i)|string }}" aria-label="Page {{ i }}">{{ i }}</a></li>
                         {% endfor %}
 
-                            <li class="current"><span class="show-for-sr">You're on page</span>{{ pagination['page'] }}</li>
+                            <li class="current" style="background-color: #042249;"><span class="show-for-sr">You're on page</span>{{ pagination['page'] }}</li>
 
                         {% for i in pagination['future']%}
                             <li><a href="{{ request.path[0:request.path.rfind('/') + 1] + (i)|string }}" aria-label="Page {{ i }}">{{ i }}</a></li>

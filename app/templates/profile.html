@@ -39,12 +39,12 @@ P01
             </div>
         <!--                          NAVBAR END                                        -->
         <div class="card" style="width: 100%;">
-            <div class="card-divider">
-                <h4 class="text-center"><b>{{dict[0]['name']}}</b></h4>
+            <div class="card-divider" style="background-color: white;">
+                <h3 style="display: block; margin-left: auto; margin-right: auto;"><b>{{dict[0]['name']}}</b></h3>
             </div>
             <img src={{dict[0]['image']}} alt="char image" style = "height: auto; width: 300px; display: block; margin-left: auto; margin-right: auto;">
             <div class="card-section">
-              <h4><b>Description</b></h4>
+              <h4><center><b>Description</b></center></h4>
               <p>{{dict[0]['description']}}</p>
               <form class = "text-center" method="GET" action="/match">
                 <input type="hidden" name = "name" value="{{dict[0]['name']}}">
@@ -52,7 +52,7 @@ P01
                 <input type="hidden" name = "image" value="{{dict[0]['image']}}">
                 <input type="hidden" name = "profile" value="profile">
                 <input type="hidden" name = "media" value="Character">
-                <input type="submit" name="sub1" value="Match" class = 'button' style="border: none; outline: none;">
+                <input type="submit" name="sub1" value="Match" class = 'button' style="border: none; outline: none; background-color: #042249;">
             </form>
             </div>
           </div>
