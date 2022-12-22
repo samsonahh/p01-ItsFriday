@@ -228,4 +228,6 @@ fixed image sizing on campatibility and match
 removed white box in Homepage
 centered search_results
 redid profile page and changed some colors
+added logo to homepages
+added tab icon to all pages (including pages with args)
 ==============================================================

@@ -7,7 +7,7 @@ P01
 <html>
     <head>
         <title>Anime Love Calculator: Compatibility</title>
-        <link rel="icon" href="static/assets/logo5.png">
+        <link rel="icon" href={{ url_for('static', filename="../static/assets/logo5.png") }}>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href={{ url_for('static', filename="../static/css/match.css") }}/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -38,7 +38,7 @@ P01
                 </div>
             </div>
         <!--                          NAVBAR END                                        -->
-        <div class="text-center" style="margin-top: 10vh;">
+        <div class="text-center" style="margin-top: 5vh;">
             <h4><b> Compatibility: {{compatibility}}%  </b></h4>
         </div>
         {% if list1 is not none %}
