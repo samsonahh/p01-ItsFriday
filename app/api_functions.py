@@ -237,19 +237,22 @@ def get_ten_quotes(character):
     json = res.json() #returns a list of dictionaries
     #print(type(json))
     #print(json)
-    quote = json[0]['quote']
-    valid_name = json[0]['character']
-    #print(valid_name)
-    if valid_name != character:
-        return ['False']
-    list = []
-    for i in json: #for each one of the dictionaries in json (which each has a quote)...
-        #print(i)
-        list.append(i['quote'])
-    #print(list) 
-    return list
+    if 'error' not in json:
+        quote = json[0]['quote']
+        valid_name = json[0]['character']
+        #print (valid_name)
+        if valid_name != character:
+            return ['False']
+        list = []
+        for i in json: #for each one of the dictionaries in json (which each has a quote)...
+            #print(i)
+            list.append(i['quote'])
+        #print(list) 
+        return list
+    else:
+        return []
 #test for get_ten_quotes
-#print(get_ten_quotes('Uryuu Ishida'))
+print(get_ten_quotes('luffy monkey d'))
 
 
 #Uses HuggingFace API to get a quote analysis for an inputed string

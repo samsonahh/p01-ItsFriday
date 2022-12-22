@@ -59,6 +59,7 @@ body {
   transform: scale(0.9,0.9);
 }
 .cella{
+  padding-top: 3vh;
 }
 
 .inpu{
@@ -74,3 +75,8 @@ body {
   color: rgb(255, 210, 239);
   opacity: 1; /* Firefox */
   }
+
+html { height: 100% }
+body { min-height: 100%; overflow-x: hidden; }
+
+/* *{ border: 1px solid red; } */
