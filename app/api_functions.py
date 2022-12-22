@@ -239,7 +239,10 @@ def get_ten_quotes(character, boolean):
     # print(json)
     if 'error' not in json:
         quote = json[0]['quote']
-        valid_name = json[0]['character']
+        if len(json) > 1:
+            valid_name = json[1]['character']
+        else:
+            valid_name = json[0]['character']
         # print (valid_name)
         if valid_name != character and boolean:
             return []
@@ -267,7 +270,7 @@ def get_ten_quotes(character, boolean):
                 return list
         return []
 #test for get_ten_quotes
-print(get_ten_quotes('red', True))
+print(get_ten_quotes('Asuka Langley Souryuu', True))
 #print(['a'] == [])
 #Uses HuggingFace API to get a quote analysis for an inputed string
 #returns a dictionary filled with keys pertaining to the emotions:
@@ -303,12 +306,12 @@ def ten_quote_analysis(quotes_list):
         
     #divide by 10 for each emotion to get the mean
     for emotion in averaged_emotion_dict:
-        averaged_emotion_dict[emotion] /= 10.0
+        averaged_emotion_dict[emotion] /= int(len(quotes_list))
         #print(emotion + ": " + str(averaged_emotion_dict[emotion]))  #this is test code
         
     return averaged_emotion_dict
-#print(get_ten_quotes('Naruto Uzumaki', True))            
-print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki', True)))     
+#print(get_ten_quotes('Naruto Uzumaki'))            
+# print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki', True)))     
 
 '''
 1. Find the mean of each sentiment given a list of quote analyses respective to a character. 
@@ -327,7 +330,7 @@ def calculate_final_compatibility(character0, character1):
     sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1, True))
     
     #step 2: isolate major sentiments (major sentiment defined as >40% for now)
-    major_sentiment_threshold = 0.40
+    major_sentiment_threshold = 0.14
     major_sentiments = []
     for emotion in sentiments_character0:
         if sentiments_character0[emotion] >= major_sentiment_threshold:

@@ -258,12 +258,12 @@ def compatibility():
         if char_one['id'] == char_two['id']:
             compatibility = 100
         else:
-            compatibility = api.calculate_final_compatibility(char_one['name'], char_two['name'])
-        return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility)
-    return render_template("compatibility.html", session_username = session['username'])
+            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
+        return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility, list1 = None)
+    return render_template("compatibility.html", session_username = session['username'], compatibility = [None], list1 = None)
 
 @app.route('/test', methods=['GET', 'POST'])
-def compatibility():
+def test():
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
     
@@ -274,7 +274,12 @@ def compatibility():
         compatibility = 100
     else:
         list1 = api.get_char_info_by_id(char_one['id'])
-        list2 = api.get_char_info_by_id(char_one)
+        list2 = api.get_char_info_by_id(char_two['id'])
+        quotes1 = api.get_ten_quotes(list1[0]['name'], True)
+        quotes2 = api.get_ten_quotes(list2[0]['name'], True)
+        fake_analysis = api.quote_analysis('I love you more than my mom.')
+        fake_compatibility = 6
+        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, quotes1 = quotes1, quotes2 = quotes2, fake_analysis= fake_analysis, compatibility = fake_compatibility)
     return render_template("compatibility.html", session_username = session['username'])
 
 if __name__ == "__main__": #false if this file imported as module
