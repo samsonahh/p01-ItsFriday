@@ -270,7 +270,7 @@ def get_ten_quotes(character, boolean):
                 return list
         return []
 #test for get_ten_quotes
-print(get_ten_quotes('Asuka Langley Souryuu', True))
+# print(get_ten_quotes('Asuka Langley Souryuu', True))
 #print(['a'] == [])
 #Uses HuggingFace API to get a quote analysis for an inputed string
 #returns a dictionary filled with keys pertaining to the emotions:
@@ -280,6 +280,9 @@ def quote_analysis(quote):
     API_TOKEN = apparatus_key_HuggingFace()
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
+    print(response.json())
+    if 'error' in response.json():
+        return {'neutral': 0.94, 'surprise':0.01, 'sadness':0.01, 'anger':0.01, 'joy':0.01, 'disgust':0.01,'fear':0.01}
     response = response.json()[0]
     emotion_dict = {}
     for i in response:
@@ -325,10 +328,11 @@ def ten_quote_analysis(quotes_list):
 '''
 def calculate_final_compatibility(character0, character1):
     LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
-    
+    character0_quotes = get_ten_quotes(character0, True)
+    character1_quotes = get_ten_quotes(character1, True)
     #step 1:
-    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0, True)) #this is a dictionary
-    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1, True))
+    sentiments_character0 = ten_quote_analysis(character0) #this is a dictionary
+    sentiments_character1 = ten_quote_analysis(character1)
     
     #step 2: isolate major sentiments (major sentiment defined as >40% for now)
     major_sentiment_threshold = 0.14
@@ -351,16 +355,19 @@ def calculate_final_compatibility(character0, character1):
     for emotion in major_sentiment_similarity:
         mean_major_sentiment_similarity += major_sentiment_similarity[emotion]
     mean_major_sentiment_similarity /= len(major_sentiments)
-    
+    # print('AAAAAAAAAA')
+    # print(mean_major_sentiment_similarity)
+    # print(LoveCalculator_compatibility)
+    # print('AAAAAAAAAA')
     #step 6:
     quote_analysis_weight = 0.86
     LoveCalculator_weight = 1.0 - quote_analysis_weight
     final_compatibility = (quote_analysis_weight * mean_major_sentiment_similarity) + \
                           (LoveCalculator_weight * LoveCalculator_compatibility)
-    
-    return final_compatibility
-print("calculate_final_compatibility(character0, character1) function test:")
-print(calculate_final_compatibility("Naruto Uzumaki", "Tanjiro Kamado"))
+    final_compatibility *= 100
+    return {'final_compatibility': int(final_compatibility), 'character0_quotes': character0_quotes, 'character1_quotes': character1_quotes, 'sentiments_character0': sentiments_character0, 'sentiments_character1': sentiments_character1}
+# print("calculate_final_compatibility(character0, character1) function test:")
+# print(calculate_final_compatibility("Naruto Uzumaki", "Tanjiro Kamado"))
     
 def get_char_info_by_id(id):
     url = f"https://kitsu.io/api/edge/characters/{id}"

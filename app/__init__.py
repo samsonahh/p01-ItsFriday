@@ -269,17 +269,13 @@ def test():
     
     char_one = {'image': 'false', 'id': 1153, 'name': 'false'}
     char_two = {'image': 'false', 'id': 1155, 'name': 'false'}
-    session.modified = True
     if char_one['id'] == char_two['id']:
         compatibility = 100
     else:
         list1 = api.get_char_info_by_id(char_one['id'])
         list2 = api.get_char_info_by_id(char_two['id'])
-        quotes1 = api.get_ten_quotes(list1[0]['name'], True)
-        quotes2 = api.get_ten_quotes(list2[0]['name'], True)
-        fake_analysis = api.quote_analysis('I love you more than my mom.')
-        fake_compatibility = 6
-        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, quotes1 = quotes1, quotes2 = quotes2, fake_analysis= fake_analysis, compatibility = fake_compatibility)
+        final = api.calculate_final_compatibility(list1[0]['name'], list2[0]['name'])
+        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, final = final, compatibility = final['final_compatibility'], list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
     return render_template("compatibility.html", session_username = session['username'])
 
 if __name__ == "__main__": #false if this file imported as module
