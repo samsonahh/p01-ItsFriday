@@ -58,19 +58,6 @@ def get_user_password(username):
 
     return dict[1]
 
-#for future uses 
-def update_history(username):
-    db = sqlite3.connect(DB_FILE) #open if file exists, if not it will create a new db          
-    c = db.cursor() #creates db cursor to execute and fetch  
-    now = datetime.now()
-    dt_string = now.strftime("%B %d , %Y %H:%M:%S")
-    data = (username, dt_string)
-
-    c.execute("INSERT INTO history VALUES(?,?)", data)
-
-    db.commit()
-    db.close()
-
 def generate_preset_database():
     reset_database()
     add_newuser('samson', 'samson123')
