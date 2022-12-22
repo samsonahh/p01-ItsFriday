@@ -281,6 +281,7 @@ def test():
         fake_compatibility = 6
         return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, quotes1 = quotes1, quotes2 = quotes2, fake_analysis= fake_analysis, compatibility = fake_compatibility)
     return render_template("compatibility.html", session_username = session['username'])
+
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True 

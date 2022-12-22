@@ -198,7 +198,7 @@ added a carousel for search_results.html
 
 ericaL -- 2022-12-20 21:35
 --------------------------------------------------------------
-middle of quote_analysis
+finished quote_analysis
 started tenquotes_analysis 
 ==============================================================
 
