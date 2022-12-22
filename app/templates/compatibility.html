@@ -41,4 +41,19 @@ P01
         <div class="text-center" style="margin-top: 10vh;">
             <h4><b> Compatibility: {{compatibility}}%  </b></h4>
         </div>
+        {% if list1 is not none %}
+            <div class="grid-x grid-margin-x" style="margin: 0 5vh 0 5vh;">
+                <div class="cell small-12 medium-6 large-6" style="text-align: center;">
+                    <h1>{{list1[0]['name']}}</h1>
+                    <img src={{list1[0]['image']}}>
+                    {{quotes1}}
+                </div>
+                <div class="cell small-12 medium-6 large-6">
+                    <h1>{{list2[0]['name']}}</h1>
+                    <img src={{list2[0]['image']}}>
+                    {{quotes2}}
+                </div>
+            </div>
+        {% endif %}
+    </body>
 </html>

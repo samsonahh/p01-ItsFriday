@@ -239,7 +239,10 @@ def get_ten_quotes(character, boolean):
     # print(json)
     if 'error' not in json:
         quote = json[0]['quote']
-        valid_name = json[0]['character']
+        if len(json) > 1:
+            valid_name = json[1]['character']
+        else:
+            valid_name = json[0]['character']
         # print (valid_name)
         if valid_name != character and boolean:
             return []
@@ -267,7 +270,7 @@ def get_ten_quotes(character, boolean):
                 return list
         return []
 #test for get_ten_quotes
-print(get_ten_quotes('red', True))
+print(get_ten_quotes('Asuka Langley Souryuu', True))
 #print(['a'] == [])
 #Uses HuggingFace API to get a quote analysis for an inputed string
 #returns a dictionary filled with keys pertaining to the emotions:
@@ -308,7 +311,7 @@ def ten_quote_analysis(quotes_list):
         
     return averaged_emotion_dict
 #print(get_ten_quotes('Naruto Uzumaki'))            
-print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki')))     
+# print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki', True)))     
 
 
 '''
@@ -324,8 +327,8 @@ def calculate_final_compatibility(character0, character1):
     LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
     
     #step 1:
-    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0))
-    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1))
+    sentiments_character0 = ten_quote_analysis(get_ten_quotes(character0, True))
+    sentiments_character1 = ten_quote_analysis(get_ten_quotes(character1, True))
     
     #step 2: isolate major sentiments
     
