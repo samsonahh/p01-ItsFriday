@@ -258,7 +258,7 @@ def compatibility():
         if char_one['id'] == char_two['id']:
             compatibility = 100
         else:
-            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name'])
+            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name']) * 100
         return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility, list1 = None)
     return render_template("compatibility.html", session_username = session['username'], compatibility = [None], list1 = None)
 
