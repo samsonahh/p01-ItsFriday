@@ -310,7 +310,6 @@ def ten_quote_analysis(quotes_list):
 #print(get_ten_quotes('Naruto Uzumaki', True))            
 print(ten_quote_analysis(get_ten_quotes('Naruto Uzumaki', True)))     
 
-
 '''
 1. Find the mean of each sentiment given a list of quote analyses respective to a character. 
 2. Isolate major sentiments from Hugging face Dataset for characters A and B
