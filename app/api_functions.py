@@ -237,18 +237,22 @@ def get_ten_quotes(character):
     json = res.json() #returns a list of dictionaries
     #print(type(json))
     #print(json)
-    quote = json[0]['quote']
-    valid_name = json[0]['character']
-    if valid_name != character:
-        return ['False']
-    list = []
-    for i in json: #for each one of the dictionaries in json (which each has a quote)...
-        #print(i)
-        list.append(i['quote'])
-    #print(list) 
-    return list
+    if 'error' not in json:
+        quote = json[0]['quote']
+        valid_name = json[0]['character']
+        #print (valid_name)
+        if valid_name != character:
+            return ['False']
+        list = []
+        for i in json: #for each one of the dictionaries in json (which each has a quote)...
+            #print(i)
+            list.append(i['quote'])
+        #print(list) 
+        return list
+    else:
+        return []
 #test for get_ten_quotes
-#print(get_ten_quotes('Uryuu Ishida'))
+print(get_ten_quotes('luffy monkey d'))
 
 #Uses HuggingFace API to get a quote analysis for an inputed string
 def quote_analysis(quote):
@@ -257,13 +261,13 @@ def quote_analysis(quote):
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
     response = requests.post(API_URL, data = {"inputs": quote}, headers = {"Authorization": f"Bearer {API_TOKEN}"})
     return(response.json())
-print(quote_analysis("hi"))
+#print(quote_analysis("hi"))
     
 #def initialize_dict():
 #    return {'neutral': '', 'surprise':'', 'sadness':'', 'anger':'', 'joy':'', 'disgust':'','fear':''}
 
-def ten_quote_analysis(dict):
-    for i in dict: 
+# def ten_quote_analysis(dict):
+#     for i in dict: 
 
 
 def get_char_info_by_id(id):
