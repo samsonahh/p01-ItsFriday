@@ -259,13 +259,14 @@ def compatibility():
         char_two = session['match_two']
         if char_one['id'] == char_two['id']:
             compatibility = 100
-        else:
             list1 = api.get_char_info_by_id(char_one['id'])
+            final = api.calculate_final_compatibility(list1[0]['name'], list1[0]['name'])
+            return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list1, final = final, compatibility = compatibility, list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'], list0 = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
+        list1 = api.get_char_info_by_id(char_one['id'])
         list2 = api.get_char_info_by_id(char_two['id'])
         final = api.calculate_final_compatibility(list1[0]['name'], list2[0]['name'])
         return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, final = final, compatibility = final['final_compatibility'], list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'], list0 = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
-        return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility, list1 = None)
-    return render_template("compatibility.html", session_username = session['username'], compatibility = [None], list1 = None)
+    return render_template("compatibility.html", session_username = session['username'], compatibility = [None])
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
