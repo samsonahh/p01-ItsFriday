@@ -231,30 +231,44 @@ print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #print(type(LoveCalculator_calculate("John", "Alice")))
 
 #Uses AnimeChan API to get a list of 10 quotes for an inputed anime character
-def get_ten_quotes(character):
+def get_ten_quotes(character, boolean):
     url = 'https://animechan.vercel.app/api/quotes/character?name=' + character
     res = requests.get(url) 
     json = res.json() #returns a list of dictionaries
     #print(type(json))
-    #print(json)
+    # print(json)
     if 'error' not in json:
         quote = json[0]['quote']
         valid_name = json[0]['character']
-        #print (valid_name)
-        if valid_name != character:
-            return ['False']
+        # print (valid_name)
+        if valid_name != character and boolean:
+            return []
         list = []
         for i in json: #for each one of the dictionaries in json (which each has a quote)...
             #print(i)
             list.append(i['quote'])
         #print(list) 
+        list.append(valid_name)
         return list
     else:
+        if boolean:
+            txt = character.split()
+            if len(txt) == 1:
+                return []
+            else:
+                list = get_ten_quotes(txt[0], False)
+                print(list)
+                if list == []:
+                    return []
+                else:
+                    for tx in txt:
+                        if tx not in list[-1]:
+                            return []
+                return list
         return []
 #test for get_ten_quotes
-print(get_ten_quotes('luffy monkey d'))
-
-
+print(get_ten_quotes('red', True))
+#print(['a'] == [])
 #Uses HuggingFace API to get a quote analysis for an inputed string
 #returns a dictionary filled with keys pertaining to the emotions:
 #anger, disgust, fear, joy, neutral, sadness, and surprise

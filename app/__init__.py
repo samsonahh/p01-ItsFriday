@@ -34,7 +34,6 @@ def home():
     if 'username' in session:
         loginstatus = True
         sessionusername = session['username']
-        print('CCCCCCCCCCC')
         session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         if request.method == 'POST':
@@ -227,16 +226,16 @@ def match_search_show_character(id, page):
     pagination = {'previous_ellipsis': previous_ellipsis, 'future_ellipsis': future_ellipsis, 'previous': previous, 'future': future, 'page': page}
     return render_template("match.html", session_username = session['username'], diction = diction, media = "Character", pagination = pagination)
 
-@app.route('/match/test')
-def match_test():
-    if not 'username' in session: #if someone tries to go here when not logged in
-        return redirect(url_for('login'))
+# @app.route('/match/test')
+# def match_test():
+#     if not 'username' in session: #if someone tries to go here when not logged in
+#         return redirect(url_for('login'))
 
-    diction = []
-    for i in range(12):
-        diction.append({"name": 'girl', "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fermentum tellus vitae quam ornare, vel mattis lacus lobortis. Pellentesque gravida hendrerit congue. Curabitur nisi erat, tincidunt ut commodo ac, imperdiet ac libero. In at diam vitae turpis maximus dapibus. Ut non nulla sit amet odio volutpat egestas. Ut pharetra odio nulla. Nulla non eleifend risus. Vestibulum non elit quam. Duis vel dolor nunc. Quisque euismod semper lorem in lacinia.', "image": "https://media.kitsu.io/characters/images/8266/original.jpg", "id": i})
-    diction = (diction, "12")
-    return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
+#     diction = []
+#     for i in range(12):
+#         diction.append({"name": 'girl', "description": 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fermentum tellus vitae quam ornare, vel mattis lacus lobortis. Pellentesque gravida hendrerit congue. Curabitur nisi erat, tincidunt ut commodo ac, imperdiet ac libero. In at diam vitae turpis maximus dapibus. Ut non nulla sit amet odio volutpat egestas. Ut pharetra odio nulla. Nulla non eleifend risus. Vestibulum non elit quam. Duis vel dolor nunc. Quisque euismod semper lorem in lacinia.', "image": "https://media.kitsu.io/characters/images/8266/original.jpg", "id": i})
+#     diction = (diction, "12")
+#     return render_template("match.html", session_username = session['username'], diction = diction, media = "Character")
 
 @app.route('/profile/Character/<id>', methods=['GET', 'POST']) #character profiles 
 def character_profile(id):
@@ -255,8 +254,6 @@ def compatibility():
     if request.method == 'POST':
         char_one = session['match_one']
         char_two = session['match_two']
-        session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
-        session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
         session.modified = True
         if char_one['id'] == char_two['id']:
             compatibility = 100
@@ -265,6 +262,20 @@ def compatibility():
         return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility)
     return render_template("compatibility.html", session_username = session['username'])
 
+@app.route('/test', methods=['GET', 'POST'])
+def compatibility():
+    if not 'username' in session: #if someone tries to go here when not logged in
+        return redirect(url_for('login'))
+    
+    char_one = {'image': 'false', 'id': 1153, 'name': 'false'}
+    char_two = {'image': 'false', 'id': 1155, 'name': 'false'}
+    session.modified = True
+    if char_one['id'] == char_two['id']:
+        compatibility = 100
+    else:
+        list1 = api.get_char_info_by_id(char_one['id'])
+        list2 = api.get_char_info_by_id(char_one)
+    return render_template("compatibility.html", session_username = session['username'])
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True 
