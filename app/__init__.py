@@ -124,7 +124,10 @@ def profile():
 def match():
     if not 'username' in session: #if someone tries to go here when not logged in
         return redirect(url_for('login'))
-
+    if 'compatibility' in request.referrer:
+        session['match_one'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+        session['match_two'] = {'image': 'false', 'id': 'false', 'name': 'false'}
+        session.modified = True
     if request.method == 'POST': # process searching functionality for character in match.html
         if 'input' in request.form:
             user_search = request.form['input'].strip()
@@ -254,11 +257,13 @@ def compatibility():
     if request.method == 'POST':
         char_one = session['match_one']
         char_two = session['match_two']
-        session.modified = True
         if char_one['id'] == char_two['id']:
             compatibility = 100
         else:
-            compatibility = api.LoveCalculator_calculate(char_one['name'], char_two['name']) * 100
+            list1 = api.get_char_info_by_id(char_one['id'])
+        list2 = api.get_char_info_by_id(char_two['id'])
+        final = api.calculate_final_compatibility(list1[0]['name'], list2[0]['name'])
+        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, final = final, compatibility = final['final_compatibility'], list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'], list0 = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
         return render_template("compatibility.html", session_username = session['username'], compatibility = compatibility, list1 = None)
     return render_template("compatibility.html", session_username = session['username'], compatibility = [None], list1 = None)
 
@@ -275,7 +280,7 @@ def test():
         list1 = api.get_char_info_by_id(char_one['id'])
         list2 = api.get_char_info_by_id(char_two['id'])
         final = api.calculate_final_compatibility(list1[0]['name'], list2[0]['name'])
-        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, final = final, compatibility = final['final_compatibility'], list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
+        return render_template("compatibility.html", session_username = session['username'], list1 = list1, list2 = list2, final = final, compatibility = final['final_compatibility'], list = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'], list0 = ['#1779ba', '#767676', '#3adb76', '#ffae00', '#cc4b37', 'purple', 'black'])
     return render_template("compatibility.html", session_username = session['username'])
 
 if __name__ == "__main__": #false if this file imported as module

@@ -227,7 +227,7 @@ def LoveCalculator_calculate(character0, character1):
         compatibility = -1 #NOTE: if key is missing or does not work, -1 is returned 
     return compatibility
 #LoveCalculator_calculate() tests:
-print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
+# print(LoveCalculator_calculate("Bobby", "Bobaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))
 #print(type(LoveCalculator_calculate("John", "Alice")))
 
 #Uses AnimeChan API to get a list of 10 quotes for an inputed anime character
@@ -329,6 +329,10 @@ def calculate_final_compatibility(character0, character1):
     LoveCalculator_compatibility = LoveCalculator_calculate(character0, character1)
     character0_quotes = get_ten_quotes(character0, True)
     character1_quotes = get_ten_quotes(character1, True)
+    if character0_quotes != []:
+        character0_quotes.pop()
+    if character1_quotes != []:
+        character1_quotes.pop()
     #step 1:
     sentiments_character0 = ten_quote_analysis(character0) #this is a dictionary
     sentiments_character1 = ten_quote_analysis(character1)
